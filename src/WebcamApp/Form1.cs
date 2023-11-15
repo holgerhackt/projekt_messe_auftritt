@@ -11,6 +11,8 @@ using AForge.Video;
 using AForge.Video.DirectShow;
 using System.Net.Http;
 using System.Text.Json;
+using System.Net;
+using System.IO;
 
 namespace WebcamApp
 {
@@ -68,10 +70,15 @@ namespace WebcamApp
             try
             {
                 string url = "https://localhost:7242/api/Images";
-                var requestData = new { name = "Hallo Webcam Bild", isComplete = true, data = bytes };
+                var requestData = new { name = textBoxName.Text, isComplete = true, data = bytes, address = new { country = textBoxCountry.Text, city = textBoxCity.Text, postalCode = textBoxPostcode.Text, street = textBoxStreet.Text, houseNumber = textBoxHousenumber.Text} };
                 string json = JsonSerializer.Serialize(requestData);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await httpClient.PostAsync(url, content);
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    string contentJsonString = JsonSerializer.Serialize(requestData);
+                    File.WriteAllText($"{textBoxCountry.Text}_{textBoxCity.Text}_{textBoxPostcode.Text}_{textBoxName.Text}.json", contentJsonString);
+                }
                 string responseContent = await response.Content.ReadAsStringAsync();
                 MessageBox.Show(responseContent);
             }
@@ -79,10 +86,6 @@ namespace WebcamApp
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
         }
     }
 }
