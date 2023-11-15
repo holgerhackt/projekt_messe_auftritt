@@ -1,8 +1,7 @@
-namespace WebApplication1.Models;
+﻿namespace WebApplication1.DTOs;
 
-public class Address
+public class AddressDto
 {
-    public int Id { get; set; }
     public string? Country { get; set; }
     public string? City { get; set; }
     public string? PostalCode { get; set; }
