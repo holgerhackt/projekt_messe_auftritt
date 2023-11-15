@@ -28,7 +28,7 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
-            return await _context.Images.ToListAsync();
+            return await _context.Images.Include(i => i.Address).ToListAsync();
         }
 
         // GET: api/Images/5
@@ -39,7 +39,7 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
-            var image = await _context.Images.FindAsync(id);
+            var image = await _context.Images.Include(i => i.Address).FirstAsync(i => i.Id == id);
 
             if (image == null)
             {

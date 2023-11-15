@@ -16,5 +16,6 @@ namespace WebApplication1.Models
 
 
         public DbSet<Image> Images { get; set; } = null!;
+        public DbSet<Address> Addresses { get; set; } = null!;
     }
 }

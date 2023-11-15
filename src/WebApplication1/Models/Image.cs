@@ -2,9 +2,11 @@
 {
     public class Image
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string? Name { get; set; }
         public bool IsComplete { get; set; }
         public byte[]? Data { get; set; }
+        public int AddressId { get; set; }
+        public Address? Address { get; set; }
     }
 }
