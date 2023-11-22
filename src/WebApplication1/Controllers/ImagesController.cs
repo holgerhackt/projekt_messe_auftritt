@@ -18,26 +18,89 @@ public class ImagesController : ControllerBase
 
     // GET: api/Images
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<User>>> GetImages()
+    public async Task<ActionResult<IEnumerable<ReturnUserDto>>> GetImages()
     {
-        return await _context.Users.Include(i => i.Address).ToListAsync();
+        var users = await _context.Users
+            .Include(u => u.Address)
+            .Include(u => u.UserInterests)
+                .ThenInclude(ui => ui.Interest)
+            .ToListAsync();
+
+        var userDtos = users.Select(user => new ReturnUserDto()
+        {
+            Id = user.Id,
+            Name = user.Name,
+            Email = user.Email,
+            Address = user.Address != null ? new Address
+            {
+                Id = user.Address.Id,
+                Country = user.Address.Country,
+                Street = user.Address.Street,
+                City = user.Address.City,
+                PostalCode = user.Address.PostalCode,
+                HouseNumber = user.Address.HouseNumber
+            } : null,
+            Interests = user.UserInterests.Select(ui => new InterestDto 
+            {
+                Id = ui.Interest.Id,
+                Name = ui.Interest.Name
+            }).ToList()
+        }).ToList();
+
+        return userDtos;
+
     }
 
     // GET: api/Images/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<User>> GetImage(long id)
+    public async Task<ActionResult<ReturnUserDto>> GetUser(int id)
     {
-        var image = await _context.Users.Include(i => i.Address).FirstAsync(i => i.Id == id);
+        var user = await _context.Users
+            .Where(u => u.Id == id)
+            .Include(u => u.Address)
+            .Include(u => u.UserInterests)
+            .ThenInclude(ui => ui.Interest)
+            .FirstOrDefaultAsync();
 
-        return image;
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var userDto = new ReturnUserDto()
+        {
+            Id = user.Id,
+            Name = user.Name,
+            Email = user.Email,
+            Address = user.Address != null ? new Address
+            {
+                Id = user.Address.Id,
+                Country = user.Address.Country,
+                Street = user.Address.Street,
+                City = user.Address.City,
+                PostalCode = user.Address.PostalCode,
+                HouseNumber = user.Address.HouseNumber
+            } : null,
+            Interests = user.UserInterests.Select(ui => new InterestDto 
+            {
+                Id = ui.Interest.Id,
+                Name = ui.Interest.Name
+            }).ToList()
+        };
+        return userDto;
     }
+
 
     // PUT: api/Images/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutImage(long id, User user)
+    public async Task<IActionResult> PutImage(int id, CreateUserDto createUserDto)
     {
-        if (id != user.Id) return BadRequest();
+        var user = await _context.Users.FindAsync(id);
+        if (user == null)
+        {
+            return BadRequest("User does not exist");
+        }
 
         _context.Entry(user).State = EntityState.Modified;
 
@@ -58,17 +121,18 @@ public class ImagesController : ControllerBase
     // POST: api/Images
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<User>> PostImage(UserDto userDto)
+    public async Task<ActionResult<CreateUserDto>> PostImage(CreateUserDto createUserDto)
     {
         var user = new User
         {
-            Name = userDto.Name,
-            Email = userDto.Email
+            Name = createUserDto.Name,
+            Email = createUserDto.Email,
+            //UserInterests = new List<UserInterest>() // add empty list
         };
-        
-        if (userDto.Address != null)
+    
+        if (createUserDto.Address != null)
         {
-            var dtoAddress = userDto.Address;
+            var dtoAddress = createUserDto.Address;
             var address = new Address
             {
                 Country = dtoAddress.Country,
@@ -77,28 +141,38 @@ public class ImagesController : ControllerBase
                 Street = dtoAddress.Street,
                 HouseNumber = dtoAddress.HouseNumber
             };
-            _context.Addresses.Add(address);
-            await _context.SaveChangesAsync();
-            user.Address = address;
+            user.Address = address; 
         }
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
-        
-        //TODO: Implement the many to many relation
-        /*if (userDto.InterestIds != null && userDto.InterestIds.Any())
+
+        _context.Users.Add(user); //Hier wird Id generiert
+
+        if (createUserDto.InterestIds != null && createUserDto.InterestIds.Any())
         {
-            foreach (int interestId in userDto.InterestIds)
+            var validInterests = _context.Interests
+                .Where(i => createUserDto.InterestIds.Contains(i.Id))
+                .ToList();
+    
+            foreach (var interest in validInterests)
             {
-                var userInterest = new UserInterest
-                {
-                    UserId = user.Id,
-                    InterestId = interestId
-                };
-                _context.UserInterests.Add(userInterest);
+                // Erstellen Sie ein neues UserInterest-Objekt für jeden gültigen Interest
+                var userInterest = new UserInterest { UserId = user.Id, InterestId = interest.Id };
+                user.UserInterests.Add(userInterest); // Fügen Sie es der UserInterests-Liste hinzu
             }
-            await _context.SaveChangesAsync();
-        }*/
-        return CreatedAtAction(nameof(GetImage), new { id = user.Id }, user);
+        }
+
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync(); // Speichern Sie alle Änderungen auf einmal
+
+
+        await _context.SaveChangesAsync(); // Einmaliges Speichern
+
+        // Erstellen eines Response-DTOs, um sensible Informationen auszublenden
+        var responseDto = new CreateUserDto
+        {
+            // Setzen Sie hier die erforderlichen Eigenschaften
+        };
+
+        return CreatedAtAction(nameof(GetUser), new { id = user.Id }, responseDto);
     }
 
     // DELETE: api/Images/5

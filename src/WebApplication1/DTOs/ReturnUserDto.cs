@@ -1,6 +1,7 @@
-﻿namespace WebApplication1.Models;
+using WebApplication1.Models;
+namespace WebApplication1.DTOs;
 
-public class User
+public class ReturnUserDto
 {
     public int Id { get; set; }
     public string? Name { get; set; }
@@ -10,7 +11,5 @@ public class User
     public Address? Address { get; set; }
     
     // Navigation Property
-    public List<Interest> Interests { get; } = new();
-    public List<UserInterest> UserInterests { get; } = new();
-    
+    public List<InterestDto> Interests { get; set; } = new();
 }
