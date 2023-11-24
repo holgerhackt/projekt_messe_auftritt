@@ -8,5 +8,5 @@ public class CreateUserDto
     public AddressDto? Address { get; set; }
     
     // Navigation Property
-    public List<int>? InterestIds { get; } = new List<int>();
+    public List<int>? InterestIds { get; set; } = new List<int>();
 }

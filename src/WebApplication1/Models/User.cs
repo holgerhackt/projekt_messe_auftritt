@@ -11,6 +11,6 @@ public class User
     
     // Navigation Property
     public List<Interest> Interests { get; } = new();
-    public List<UserInterest> UserInterests { get; } = new();
+    public List<UserInterest> UserInterests { get; set; } = new();
     
 }

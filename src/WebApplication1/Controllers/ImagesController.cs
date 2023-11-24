@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
 using WebApplication1.DTOs;
@@ -10,10 +11,12 @@ namespace WebApplication1.Controllers;
 public class ImagesController : ControllerBase
 {
     private readonly ImageContext _context;
+    private readonly IMapper _mapper;
 
-    public ImagesController(ImageContext context)
+    public ImagesController(ImageContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
     // GET: api/Images
@@ -25,28 +28,8 @@ public class ImagesController : ControllerBase
             .Include(u => u.UserInterests)
                 .ThenInclude(ui => ui.Interest)
             .ToListAsync();
-
-        var userDtos = users.Select(user => new ReturnUserDto()
-        {
-            Id = user.Id,
-            Name = user.Name,
-            Email = user.Email,
-            Address = user.Address != null ? new Address
-            {
-                Id = user.Address.Id,
-                Country = user.Address.Country,
-                Street = user.Address.Street,
-                City = user.Address.City,
-                PostalCode = user.Address.PostalCode,
-                HouseNumber = user.Address.HouseNumber
-            } : null,
-            Interests = user.UserInterests.Select(ui => new InterestDto 
-            {
-                Id = ui.Interest.Id,
-                Name = ui.Interest.Name
-            }).ToList()
-        }).ToList();
-
+        
+        var userDtos = _mapper.Map<List<User>, List<ReturnUserDto>>(users);
         return userDtos;
 
     }
@@ -59,7 +42,7 @@ public class ImagesController : ControllerBase
             .Where(u => u.Id == id)
             .Include(u => u.Address)
             .Include(u => u.UserInterests)
-            .ThenInclude(ui => ui.Interest)
+                .ThenInclude(ui => ui.Interest)
             .FirstOrDefaultAsync();
 
         if (user == null)
@@ -67,26 +50,7 @@ public class ImagesController : ControllerBase
             return NotFound();
         }
 
-        var userDto = new ReturnUserDto()
-        {
-            Id = user.Id,
-            Name = user.Name,
-            Email = user.Email,
-            Address = user.Address != null ? new Address
-            {
-                Id = user.Address.Id,
-                Country = user.Address.Country,
-                Street = user.Address.Street,
-                City = user.Address.City,
-                PostalCode = user.Address.PostalCode,
-                HouseNumber = user.Address.HouseNumber
-            } : null,
-            Interests = user.UserInterests.Select(ui => new InterestDto 
-            {
-                Id = ui.Interest.Id,
-                Name = ui.Interest.Name
-            }).ToList()
-        };
+        var userDto = _mapper.Map<User, ReturnUserDto>(user);
         return userDto;
     }
 
@@ -102,7 +66,7 @@ public class ImagesController : ControllerBase
             return BadRequest("User does not exist");
         }
 
-        _context.Entry(user).State = EntityState.Modified;
+        // _context.Entry(user).State = EntityState.Modified;
 
         try
         {
@@ -123,55 +87,24 @@ public class ImagesController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<CreateUserDto>> PostImage(CreateUserDto createUserDto)
     {
-        var user = new User
-        {
-            Name = createUserDto.Name,
-            Email = createUserDto.Email,
-            //UserInterests = new List<UserInterest>() // add empty list
-        };
-    
-        if (createUserDto.Address != null)
-        {
-            var dtoAddress = createUserDto.Address;
-            var address = new Address
-            {
-                Country = dtoAddress.Country,
-                City = dtoAddress.City,
-                PostalCode = dtoAddress.PostalCode,
-                Street = dtoAddress.Street,
-                HouseNumber = dtoAddress.HouseNumber
-            };
-            user.Address = address; 
-        }
+        var user = _mapper.Map<User>(createUserDto);
 
-        _context.Users.Add(user); //Hier wird Id generiert
-
-        if (createUserDto.InterestIds != null && createUserDto.InterestIds.Any())
+        if (createUserDto.InterestIds != null)
         {
-            var validInterests = _context.Interests
+            var validInterests = await _context.Interests
                 .Where(i => createUserDto.InterestIds.Contains(i.Id))
-                .ToList();
-    
-            foreach (var interest in validInterests)
+                .ToListAsync();
+            
+            foreach (var userInterest in validInterests.Select(interest => new UserInterest { InterestId = interest.Id })) // Because the navigation property is very smart, we don´t need to set the User property of the UserInterest object, because it is set automatically.
             {
-                // Erstellen Sie ein neues UserInterest-Objekt für jeden gültigen Interest
-                var userInterest = new UserInterest { UserId = user.Id, InterestId = interest.Id };
-                user.UserInterests.Add(userInterest); // Fügen Sie es der UserInterests-Liste hinzu
+                user.UserInterests.Add(userInterest);
             }
         }
 
         _context.Users.Add(user);
-        await _context.SaveChangesAsync(); // Speichern Sie alle Änderungen auf einmal
-
-
-        await _context.SaveChangesAsync(); // Einmaliges Speichern
-
-        // Erstellen eines Response-DTOs, um sensible Informationen auszublenden
-        var responseDto = new CreateUserDto
-        {
-            // Setzen Sie hier die erforderlichen Eigenschaften
-        };
-
+        await _context.SaveChangesAsync();
+        
+        var responseDto = _mapper.Map<ReturnUserDto>(user);
         return CreatedAtAction(nameof(GetUser), new { id = user.Id }, responseDto);
     }
 

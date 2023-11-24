@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Models;
 
 public class ImageContext : DbContext
 {
     protected readonly IConfiguration Configuration;
+    
+
 
     public ImageContext(IConfiguration configuration)
     {
