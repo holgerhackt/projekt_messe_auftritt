@@ -3,11 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebApplication1.Models;
 
 #nullable disable
 
-namespace WebApplication1.Migrations
+namespace ApiServer.Migrations
 {
     [DbContext(typeof(ImageContext))]
     [Migration("20231115103027_AddedAddressProperties")]
@@ -19,7 +18,7 @@ namespace WebApplication1.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.14");
 
-            modelBuilder.Entity("WebApplication1.Models.Address", b =>
+            modelBuilder.Entity("ApiServer.Models.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,7 +48,7 @@ namespace WebApplication1.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.Image", b =>
+            modelBuilder.Entity("ApiServer.Models.Image", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,9 +73,9 @@ namespace WebApplication1.Migrations
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.Image", b =>
+            modelBuilder.Entity("ApiServer.Models.Image", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Address", "Address")
+                    b.HasOne("ApiServer.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)

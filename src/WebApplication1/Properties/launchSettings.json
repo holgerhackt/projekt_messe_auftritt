@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "WebApplication1": {
+    "ApiServer": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

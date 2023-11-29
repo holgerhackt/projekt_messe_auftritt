@@ -3,11 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebApplication1.Models;
 
 #nullable disable
 
-namespace WebApplication1.Migrations
+namespace ApiServer.Migrations
 {
     [DbContext(typeof(ImageContext))]
     [Migration("20231115053108_InitialCreate")]
@@ -19,7 +18,7 @@ namespace WebApplication1.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.14");
 
-            modelBuilder.Entity("WebApplication1.Models.Image", b =>
+            modelBuilder.Entity("ApiServer.Models.Image", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()

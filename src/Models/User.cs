@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.Models;
+﻿namespace Models;
+
+using System.Text.Json.Serialization;
 
 public class User
 {
@@ -8,9 +10,8 @@ public class User
     //public byte[]? Data { get; set; }
     public int AddressId { get; set; }
     public Address? Address { get; set; }
-    
-    // Navigation Property
-    public List<Interest> Interests { get; } = new();
-    public List<UserInterest> UserInterests { get; set; } = new();
-    
+
+	// Navigation Property
+	[JsonIgnore]
+	public List<Interest> Interests { get; } = new();
 }

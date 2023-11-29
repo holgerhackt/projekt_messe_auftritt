@@ -1,4 +1,4 @@
-﻿namespace WebApplication1.Models;
+﻿namespace Models;
 
 public class Interest
 {
@@ -7,5 +7,4 @@ public class Interest
     
     // Navigation Property
     public List<User> Users { get; } = new();
-    public List<UserInterest> UserInterests { get; } = new();
 }

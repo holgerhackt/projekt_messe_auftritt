@@ -3,11 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebApplication1.Models;
 
 #nullable disable
 
-namespace WebApplication1.Migrations
+namespace ApiServer.Migrations
 {
     [DbContext(typeof(ImageContext))]
     [Migration("20231115154407_AddUserInterests")]
@@ -19,7 +18,7 @@ namespace WebApplication1.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.14");
 
-            modelBuilder.Entity("WebApplication1.Models.Address", b =>
+            modelBuilder.Entity("ApiServer.Models.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,7 +44,7 @@ namespace WebApplication1.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.ProductGroup", b =>
+            modelBuilder.Entity("ApiServer.Models.ProductGroup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,7 +58,7 @@ namespace WebApplication1.Migrations
                     b.ToTable("ProductGroups");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.User", b =>
+            modelBuilder.Entity("ApiServer.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,7 +80,7 @@ namespace WebApplication1.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.UserInterest", b =>
+            modelBuilder.Entity("ApiServer.Models.UserInterest", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
@@ -96,9 +95,9 @@ namespace WebApplication1.Migrations
                     b.ToTable("UserInterests");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.User", b =>
+            modelBuilder.Entity("ApiServer.Models.User", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Address", "Address")
+                    b.HasOne("ApiServer.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -107,15 +106,15 @@ namespace WebApplication1.Migrations
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.UserInterest", b =>
+            modelBuilder.Entity("ApiServer.Models.UserInterest", b =>
                 {
-                    b.HasOne("WebApplication1.Models.ProductGroup", "ProductGroup")
+                    b.HasOne("ApiServer.Models.ProductGroup", "ProductGroup")
                         .WithMany("UserInterests")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebApplication1.Models.User", "User")
+                    b.HasOne("ApiServer.Models.User", "User")
                         .WithMany("UserInterests")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -126,12 +125,12 @@ namespace WebApplication1.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.ProductGroup", b =>
+            modelBuilder.Entity("ApiServer.Models.ProductGroup", b =>
                 {
                     b.Navigation("UserInterests");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.User", b =>
+            modelBuilder.Entity("ApiServer.Models.User", b =>
                 {
                     b.Navigation("UserInterests");
                 });

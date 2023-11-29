@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace WebApplication1.Migrations
+namespace ApiServer.Migrations
 {
     /// <inheritdoc />
     public partial class AddedAddressProperties : Migration
