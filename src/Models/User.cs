@@ -12,6 +12,6 @@ public class User
     public Address? Address { get; set; }
 
 	// Navigation Property
-	[JsonIgnore]
-	public List<Interest> Interests { get; } = new();
+	
+	public List<Interest> Interests { get; set; } = new();
 }
