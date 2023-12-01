@@ -1,16 +1,11 @@
-namespace ApiServer.Controllers;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
 using Models;
 
+namespace ApiServer.Controllers;
+
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class InterestsController : ControllerBase
@@ -35,10 +30,7 @@ public class InterestsController : ControllerBase
 	{
 		var interest = await _context.Interests.FindAsync(id);
 
-		if (interest == null)
-		{
-			return NotFound();
-		}
+		if (interest == null) return NotFound();
 
 		return interest;
 	}
@@ -48,10 +40,7 @@ public class InterestsController : ControllerBase
 	[HttpPut("{id}")]
 	public async Task<IActionResult> PutInterest(int id, Interest interest)
 	{
-		if (id != interest.Id)
-		{
-			return BadRequest();
-		}
+		if (id != interest.Id) return BadRequest();
 
 		_context.Entry(interest).State = EntityState.Modified;
 
@@ -62,13 +51,8 @@ public class InterestsController : ControllerBase
 		catch (DbUpdateConcurrencyException)
 		{
 			if (!InterestExists(id))
-			{
 				return NotFound();
-			}
-			else
-			{
-				throw;
-			}
+			throw;
 		}
 
 		return NoContent();
@@ -90,10 +74,7 @@ public class InterestsController : ControllerBase
 	public async Task<IActionResult> DeleteInterest(int id)
 	{
 		var interest = await _context.Interests.FindAsync(id);
-		if (interest == null)
-		{
-			return NotFound();
-		}
+		if (interest == null) return NotFound();
 
 		_context.Interests.Remove(interest);
 		await _context.SaveChangesAsync();
