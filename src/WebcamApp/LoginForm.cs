@@ -10,14 +10,14 @@ using Models.Authentication;
 
 namespace WebcamApp;
 
-public partial class LoginForm : Form
+internal partial class LoginForm : Form
 {
 	public LoginForm()
 	{
 		InitializeComponent();
 	}
 
-	public HttpClient HttpClient { get; private set; }
+	public ApiClient ApiClient { get; private set; }
 
 	private async void Login_Click(object sender, EventArgs e)
 	{
@@ -42,7 +42,7 @@ public partial class LoginForm : Form
 		var token = JsonSerializer.Deserialize<LoginResponse>(text, SerializerOptions.ApiServerOptions)!;
 		httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token.Token}");
 
-		HttpClient = httpClient;
+		ApiClient = new ApiClient(httpClient);
 		DialogResult = DialogResult.OK;
 		Close();
 	}

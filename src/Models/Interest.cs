@@ -8,5 +8,5 @@ public class Interest
 	public string Name { get; set; }
 
 	// Navigation Property
-	[JsonIgnore] public List<User> Users { get; } = new();
+	[JsonIgnore] public IEnumerable<User> Users { get; }
 }

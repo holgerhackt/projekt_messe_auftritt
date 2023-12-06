@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -10,14 +11,17 @@ using System.Windows.Forms;
 using AForge.Video;
 using AForge.Video.DirectShow;
 using Models;
+using WebcamApp.Properties;
 
 namespace WebcamApp;
 
-public partial class CameraForm : Form
+internal partial class CameraForm : Form
 {
-	private readonly HttpClient _httpClient;
+	private readonly ApiClient _apiClient;
 	private FilterInfoCollection? _filterInfoCollection;
 	private VideoCaptureDevice? _videoCaptureDevice;
+	private List<Interest>? _interests;
+	private List<Company>? _companies;
 
 	public CameraForm()
 	{
@@ -30,7 +34,27 @@ public partial class CameraForm : Form
 			return;
 		}
 
-		_httpClient = loginForm.HttpClient;
+		_apiClient = loginForm.ApiClient;
+		interestsCheckedListBox.DisplayMember = nameof(Interest.Name);
+		interestsCheckedListBox.ValueMember = nameof(Interest.Id);
+		_apiClient.GetInterestsAsync().ContinueWith(task =>
+		{
+			if (task.Exception != null)
+			{
+				MessageBox.Show(task.Exception.Message);
+				return;
+			}
+
+			_interests = task.Result;
+			if (_interests == null) return;
+
+			Invoke(AddInterests);
+		});
+	}
+
+	private void AddInterests()
+	{
+		foreach (var interest in _interests) interestsCheckedListBox.Items.Add(interest);
 	}
 
 	private void StartCameraButton_Click(object sender, EventArgs e)
@@ -55,7 +79,13 @@ public partial class CameraForm : Form
 
 	private void VideoCaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
 	{
-		pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+		var frame = (Bitmap)eventArgs.Frame.Clone();
+		Invoke(() => NewFrameOnUiThread(frame));
+	}
+
+	private void NewFrameOnUiThread(Bitmap frame)
+	{
+		pictureBox1.Image = frame;
 	}
 
 	private void Form1_Load(object sender, EventArgs e)
@@ -105,19 +135,9 @@ public partial class CameraForm : Form
 				},
 				Interests = new List<Interest>()
 			};
-			var json = JsonSerializer.Serialize(requestData, SerializerOptions.ApiServerOptions);
-			var content = new StringContent(json, Encoding.UTF8, "application/json");
-			var response = await _httpClient.PostAsync("/api/Users", content);
-			if (response.StatusCode != HttpStatusCode.Created)
-			{
-				var contentJsonString = JsonSerializer.Serialize(requestData, SerializerOptions.ApiServerOptions);
-				File.WriteAllText(
-					$"{textBoxCountry.Text}_{textBoxCity.Text}_{textBoxPostcode.Text}_{textBoxName.Text}.json",
-					contentJsonString);
-			}
-
-			var responseContent = await response.Content.ReadAsStringAsync();
-			MessageBox.Show(responseContent, response.StatusCode.ToString());
+			var user = await _apiClient.PostUserAsync(requestData);
+			var text = string.Format(Resources.UserCreationSuccessText, user?.Name);
+			MessageBox.Show(text, Resources.UserCreationSuccessCaption);
 		}
 		catch (Exception ex)
 		{
