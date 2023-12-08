@@ -48,6 +48,9 @@ public class UsersController : ControllerBase
 	[HttpPost]
 	public async Task<ActionResult> PostImage(User user)
 	{
+		var interests = await _context.Interests.ToListAsync();
+		user.Interests = interests.Where(user.Interests.Contains).ToList();
+
 		var resUser = await _context.Users.AddAsync(user);
 		await _context.SaveChangesAsync();
 

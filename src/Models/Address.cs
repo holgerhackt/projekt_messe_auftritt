@@ -8,4 +8,5 @@ public class Address
 	public string? PostalCode { get; set; }
 	public string? Street { get; set; }
 	public string? HouseNumber { get; set; }
+	public int important { get; set; }
 }

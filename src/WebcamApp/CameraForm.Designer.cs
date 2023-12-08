@@ -33,7 +33,6 @@
 			pictureBox1 = new System.Windows.Forms.PictureBox();
 			StartCameraButton = new System.Windows.Forms.Button();
 			PhotoButton = new System.Windows.Forms.Button();
-			textBoxAPIStatus = new System.Windows.Forms.TextBox();
 			NameLabel = new System.Windows.Forms.Label();
 			textBoxName = new System.Windows.Forms.TextBox();
 			CountryLabel = new System.Windows.Forms.Label();
@@ -46,17 +45,19 @@
 			textBoxStreet = new System.Windows.Forms.TextBox();
 			HousenumberLabel = new System.Windows.Forms.Label();
 			textBoxHousenumber = new System.Windows.Forms.TextBox();
-			label8 = new System.Windows.Forms.Label();
+			interestsCheckedListBox = new System.Windows.Forms.CheckedListBox();
+			companyCheckedListBox = new System.Windows.Forms.CheckedListBox();
 			((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
 			SuspendLayout();
 			// 
 			// cboCamera
 			// 
+			cboCamera.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
 			cboCamera.FormattingEnabled = true;
-			cboCamera.Location = new System.Drawing.Point(110, 35);
+			cboCamera.Location = new System.Drawing.Point(87, 35);
 			cboCamera.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			cboCamera.Name = "cboCamera";
-			cboCamera.Size = new System.Drawing.Size(445, 23);
+			cboCamera.Size = new System.Drawing.Size(535, 23);
 			cboCamera.TabIndex = 0;
 			// 
 			// CameraLabel
@@ -71,18 +72,20 @@
 			// 
 			// pictureBox1
 			// 
-			pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+			pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
 			pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			pictureBox1.Location = new System.Drawing.Point(46, 75);
+			pictureBox1.InitialImage = null;
+			pictureBox1.Location = new System.Drawing.Point(42, 68);
 			pictureBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			pictureBox1.Name = "pictureBox1";
-			pictureBox1.Size = new System.Drawing.Size(779, 617);
-			pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Normal;
+			pictureBox1.Size = new System.Drawing.Size(779, 634);
+			pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			pictureBox1.TabIndex = 2;
 			pictureBox1.TabStop = false;
 			// 
 			// StartCameraButton
 			// 
+			StartCameraButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
 			StartCameraButton.Location = new System.Drawing.Point(630, 35);
 			StartCameraButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			StartCameraButton.Name = "StartCameraButton";
@@ -94,6 +97,7 @@
 			// 
 			// PhotoButton
 			// 
+			PhotoButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
 			PhotoButton.Location = new System.Drawing.Point(737, 35);
 			PhotoButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			PhotoButton.Name = "PhotoButton";
@@ -102,15 +106,6 @@
 			PhotoButton.Text = "Photo";
 			PhotoButton.UseVisualStyleBackColor = true;
 			PhotoButton.Click += PhotoButton_Click;
-			// 
-			// textBoxAPIStatus
-			// 
-			textBoxAPIStatus.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-			textBoxAPIStatus.Location = new System.Drawing.Point(855, 669);
-			textBoxAPIStatus.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-			textBoxAPIStatus.Name = "textBoxAPIStatus";
-			textBoxAPIStatus.Size = new System.Drawing.Size(650, 23);
-			textBoxAPIStatus.TabIndex = 5;
 			// 
 			// NameLabel
 			// 
@@ -232,23 +227,29 @@
 			textBoxHousenumber.Size = new System.Drawing.Size(655, 23);
 			textBoxHousenumber.TabIndex = 17;
 			// 
-			// label8
+			// interestsCheckedListBox
 			// 
-			label8.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-			label8.AutoSize = true;
-			label8.Location = new System.Drawing.Point(852, 651);
-			label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			label8.Name = "label8";
-			label8.Size = new System.Drawing.Size(60, 15);
-			label8.TabIndex = 18;
-			label8.Text = "Api Status";
+			interestsCheckedListBox.FormattingEnabled = true;
+			interestsCheckedListBox.Location = new System.Drawing.Point(852, 392);
+			interestsCheckedListBox.Name = "interestsCheckedListBox";
+			interestsCheckedListBox.Size = new System.Drawing.Size(364, 310);
+			interestsCheckedListBox.TabIndex = 18;
+			// 
+			// companyCheckedListBox
+			// 
+			companyCheckedListBox.FormattingEnabled = true;
+			companyCheckedListBox.Location = new System.Drawing.Point(1222, 392);
+			companyCheckedListBox.Name = "companyCheckedListBox";
+			companyCheckedListBox.Size = new System.Drawing.Size(288, 310);
+			companyCheckedListBox.TabIndex = 19;
 			// 
 			// CameraForm
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			ClientSize = new System.Drawing.Size(1520, 742);
-			Controls.Add(label8);
+			Controls.Add(companyCheckedListBox);
+			Controls.Add(interestsCheckedListBox);
 			Controls.Add(textBoxHousenumber);
 			Controls.Add(HousenumberLabel);
 			Controls.Add(textBoxStreet);
@@ -261,7 +262,6 @@
 			Controls.Add(CountryLabel);
 			Controls.Add(textBoxName);
 			Controls.Add(NameLabel);
-			Controls.Add(textBoxAPIStatus);
 			Controls.Add(PhotoButton);
 			Controls.Add(StartCameraButton);
 			Controls.Add(pictureBox1);
@@ -284,7 +284,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button StartCameraButton;
         private System.Windows.Forms.Button PhotoButton;
-        private System.Windows.Forms.TextBox textBoxAPIStatus;
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label CountryLabel;
@@ -297,7 +296,8 @@
         private System.Windows.Forms.TextBox textBoxStreet;
         private System.Windows.Forms.Label HousenumberLabel;
         private System.Windows.Forms.TextBox textBoxHousenumber;
-        private System.Windows.Forms.Label label8;
-    }
+		private System.Windows.Forms.CheckedListBox interestsCheckedListBox;
+		private System.Windows.Forms.CheckedListBox companyCheckedListBox;
+	}
 }
 
