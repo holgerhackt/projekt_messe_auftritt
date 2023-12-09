@@ -3,6 +3,7 @@ using System;
 using ApiServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiServer.Migrations
 {
     [DbContext(typeof(ImageContext))]
-    partial class ImageContextModelSnapshot : ModelSnapshot
+    [Migration("20231209094128_superTest")]
+    partial class superTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.25");
@@ -253,26 +255,6 @@ namespace ApiServer.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("Models.Company", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.ToTable("Company");
-                });
-
             modelBuilder.Entity("Models.Interest", b =>
                 {
                     b.Property<int>("Id")
@@ -297,9 +279,6 @@ namespace ApiServer.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CompanyId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
@@ -309,8 +288,6 @@ namespace ApiServer.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
-
-                    b.HasIndex("CompanyId");
 
                     b.ToTable("Users");
                 });
@@ -381,17 +358,6 @@ namespace ApiServer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Models.Company", b =>
-                {
-                    b.HasOne("Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
-                });
-
             modelBuilder.Entity("Models.User", b =>
                 {
                     b.HasOne("Models.Address", "Address")
@@ -400,13 +366,7 @@ namespace ApiServer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId");
-
                     b.Navigation("Address");
-
-                    b.Navigation("Company");
                 });
 #pragma warning restore 612, 618
         }

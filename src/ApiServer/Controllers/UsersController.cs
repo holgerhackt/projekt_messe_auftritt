@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
@@ -23,7 +24,8 @@ public class UsersController : ControllerBase
 	{
 		var users = await _context.Users
 			.Include(u => u.Address)
-			.Include(u => u.Interests)
+            .Include(u => u.Company)
+            .Include(u => u.Interests)
 			.ToListAsync();
 
 		return users;
@@ -49,7 +51,27 @@ public class UsersController : ControllerBase
 	public async Task<ActionResult> PostImage(User user)
 	{
 		var interests = await _context.Interests.ToListAsync();
-		user.Interests = interests.Where(user.Interests.Contains).ToList();
+        var companies = await _context.Company.ToListAsync();
+        //user.Interests = interests.Where(user.Interests.Contains).ToList();
+
+        foreach (var interest in interests)
+		{
+			for (int i= 0;i < user.Interests.Count;i++)
+			{
+				if(interest.Id == user.Interests[i].Id)
+				{
+                    user.Interests[i] = interest;
+				}
+			}
+		}
+
+		if(user.Company != null)
+		{
+			foreach(Company c in companies)
+			{
+				if(user.Company.Id == c.Id) user.Company= c;
+			}
+		}
 
 		var resUser = await _context.Users.AddAsync(user);
 		await _context.SaveChangesAsync();

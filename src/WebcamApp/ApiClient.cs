@@ -27,9 +27,9 @@ internal class ApiClient
 
 	public async Task<Interest?> PostInterestAsync(Interest interest) => await PostAsync("/api/Interests", interest);
 
-	public async Task<IEnumerable<Company>?> GetCompaniesAsync() => await GetListAsync<Company>("/api/Companies");
+	public async Task<IEnumerable<Company>?> GetCompaniesAsync() => await GetListAsync<Company>("/api/Company");
 
-	public async Task<Company?> PostCompanyAsync(Company company) => await PostAsync("/api/Companies", company);
+	public async Task<Company?> PostCompanyAsync(Company company) => await PostAsync("/api/Company", company);
 
 	private async Task<IEnumerable<T>?> GetListAsync<T>(string url) =>
 		await JsonSerializer.DeserializeAsync<IEnumerable<T>>(

@@ -17,9 +17,12 @@ public class ImageContext : IdentityDbContext<Account>
 	public DbSet<User> Users { get; set; } = null!;
 	public DbSet<Address> Addresses { get; set; } = null!;
 	public DbSet<Interest> Interests { get; set; } = null!;
+    public DbSet<Company> Company { get; set; } = null!;
 
-	protected override void OnConfiguring(DbContextOptionsBuilder options)
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
 	{
 		options.UseSqlite(Configuration.GetConnectionString("TestDatabase"));
 	}
+
+	
 }

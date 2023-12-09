@@ -36,7 +36,9 @@ internal partial class CameraForm : Form
 
 		_apiClient = loginForm.ApiClient;
 		interestsCheckedListBox.DisplayMember = nameof(Interest.Name);
+		companyCheckedListBox.DisplayMember = nameof(Company.Name);
 		interestsCheckedListBox.ValueMember = nameof(Interest.Id);
+		companyCheckedListBox.ValueMember = nameof(Company.Id);
 		_apiClient.GetInterestsAsync().ContinueWith(task =>
 		{
 			if (task.Exception != null)
@@ -45,19 +47,37 @@ internal partial class CameraForm : Form
 				return;
 			}
 
-			_interests = task.Result;
+			_interests = (List<Interest>?)task.Result;
 			if (_interests == null) return;
 
 			Invoke(AddInterests);
 		});
-	}
+		_apiClient.GetCompaniesAsync().ContinueWith(task =>
+		{
+			if (task.Exception != null)
+			{
+				MessageBox.Show(task.Exception.Message);
+				return;
+			}
+
+			_companies = (List<Company>?)task.Result;
+			if (_companies == null) return;
+
+			Invoke(AddCompanies);
+		});
+    }
 
 	private void AddInterests()
 	{
 		foreach (var interest in _interests) interestsCheckedListBox.Items.Add(interest);
 	}
 
-	private void StartCameraButton_Click(object sender, EventArgs e)
+    private void AddCompanies()
+    {
+        foreach (var company in _companies) companyCheckedListBox.Items.Add(company);
+    }
+
+    private void StartCameraButton_Click(object sender, EventArgs e)
 	{
 		if (_filterInfoCollection == null)
 		{
@@ -125,16 +145,41 @@ internal partial class CameraForm : Form
 		try
 		{
 			var requestData = new User
+            {
+                Name = textBoxName.Text,
+                //Data = bytes,
+                Address = new Address
+                {
+                    Country = textBoxCountry.Text,
+                    City = textBoxCity.Text,
+                    PostalCode = textBoxPostcode.Text,
+                    Street = textBoxStreet.Text,
+                    HouseNumber = textBoxHousenumber.Text
+                },
+                Interests = new List<Interest>()
+            };
+            if (companyCheckedListBox.CheckedItems.Count == 1) 
 			{
-				Name = textBoxName.Text,
-				//Data = bytes,
-				Address = new Address
+				requestData = new User
 				{
-					Country = textBoxCountry.Text, City = textBoxCity.Text, PostalCode = textBoxPostcode.Text,
-					Street = textBoxStreet.Text, HouseNumber = textBoxHousenumber.Text
-				},
-				Interests = new List<Interest>()
-			};
+					Name = textBoxName.Text,
+					//Data = bytes,
+					Address = new Address
+					{
+						Country = textBoxCountry.Text,
+						City = textBoxCity.Text,
+						PostalCode = textBoxPostcode.Text,
+						Street = textBoxStreet.Text,
+						HouseNumber = textBoxHousenumber.Text
+					},
+					Interests = new List<Interest>(),
+					Company = (Company)companyCheckedListBox.CheckedItems[0]
+				};
+            }
+			foreach(Interest interest in interestsCheckedListBox.CheckedItems)
+			{
+				requestData.Interests.Add(interest);
+			}
 			var user = await _apiClient.PostUserAsync(requestData);
 			var text = string.Format(Resources.UserCreationSuccessText, user?.Name);
 			MessageBox.Show(text, Resources.UserCreationSuccessCaption);
