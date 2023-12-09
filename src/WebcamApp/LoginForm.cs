@@ -51,4 +51,11 @@ internal partial class LoginForm : Form
 	{
 		if (e.KeyCode == Keys.Enter) Login_Click(sender, e);
 	}
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+		ApiClient = null;
+		DialogResult = DialogResult.OK;
+		Close();
+    }
 }

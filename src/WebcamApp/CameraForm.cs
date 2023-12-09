@@ -34,37 +34,42 @@ internal partial class CameraForm : Form
 			return;
 		}
 
-		_apiClient = loginForm.ApiClient;
-		interestsCheckedListBox.DisplayMember = nameof(Interest.Name);
-		companyCheckedListBox.DisplayMember = nameof(Company.Name);
-		interestsCheckedListBox.ValueMember = nameof(Interest.Id);
-		companyCheckedListBox.ValueMember = nameof(Company.Id);
-		_apiClient.GetInterestsAsync().ContinueWith(task =>
+		if(loginForm.ApiClient != null)
 		{
-			if (task.Exception != null)
-			{
-				MessageBox.Show(task.Exception.Message);
-				return;
-			}
+            _apiClient = loginForm.ApiClient;
+            interestsCheckedListBox.DisplayMember = nameof(Interest.Name);
+            companyCheckedListBox.DisplayMember = nameof(Company.Name);
+            interestsCheckedListBox.ValueMember = nameof(Interest.Id);
+            companyCheckedListBox.ValueMember = nameof(Company.Id);
+            _apiClient.GetInterestsAsync().ContinueWith(task =>
+            {
+                if (task.Exception != null)
+                {
+                    MessageBox.Show(task.Exception.Message);
+                    return;
+                }
 
-			_interests = (List<Interest>?)task.Result;
-			if (_interests == null) return;
+                _interests = (List<Interest>?)task.Result;
+                if (_interests == null) return;
 
-			Invoke(AddInterests);
-		});
-		_apiClient.GetCompaniesAsync().ContinueWith(task =>
-		{
-			if (task.Exception != null)
-			{
-				MessageBox.Show(task.Exception.Message);
-				return;
-			}
+                Invoke(AddInterests);
+            });
+            _apiClient.GetCompaniesAsync().ContinueWith(task =>
+            {
+                if (task.Exception != null)
+                {
+                    MessageBox.Show(task.Exception.Message);
+                    return;
+                }
 
-			_companies = (List<Company>?)task.Result;
-			if (_companies == null) return;
+                _companies = (List<Company>?)task.Result;
+                if (_companies == null) return;
 
-			Invoke(AddCompanies);
-		});
+                Invoke(AddCompanies);
+            });
+        }
+
+		
     }
 
 	private void AddInterests()
@@ -176,13 +181,22 @@ internal partial class CameraForm : Form
 					Company = (Company)companyCheckedListBox.CheckedItems[0]
 				};
             }
-			foreach(Interest interest in interestsCheckedListBox.CheckedItems)
+			if(_apiClient!= null)
 			{
-				requestData.Interests.Add(interest);
+                foreach (Interest interest in interestsCheckedListBox.CheckedItems)
+                {
+                    requestData.Interests.Add(interest);
+                }
+                var user = await _apiClient.PostUserAsync(requestData);
+                var text = string.Format(Resources.UserCreationSuccessText, user?.Name);
+                MessageBox.Show(text, Resources.UserCreationSuccessCaption);
 			}
-			var user = await _apiClient.PostUserAsync(requestData);
-			var text = string.Format(Resources.UserCreationSuccessText, user?.Name);
-			MessageBox.Show(text, Resources.UserCreationSuccessCaption);
+			else
+			{
+                string userJsonFileContent = JsonSerializer.Serialize(requestData);
+                File.WriteAllText($"{textBoxName.Text}_{textBoxCountry.Text}_{textBoxCity.Text}_{textBoxPostcode.Text}_{textBoxStreet.Text}_{textBoxHousenumber.Text}.json", userJsonFileContent);
+            }
+			
 		}
 		catch (Exception ex)
 		{
