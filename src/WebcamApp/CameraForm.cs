@@ -41,6 +41,7 @@ internal partial class CameraForm : Form
             companyCheckedListBox.DisplayMember = nameof(Company.Name);
             interestsCheckedListBox.ValueMember = nameof(Interest.Id);
             companyCheckedListBox.ValueMember = nameof(Company.Id);
+			//Fill interest CheckedListbox
             _apiClient.GetInterestsAsync().ContinueWith(task =>
             {
                 if (task.Exception != null)
@@ -54,6 +55,7 @@ internal partial class CameraForm : Form
 
                 Invoke(AddInterests);
             });
+			//Fill company CheckedlListbox
             _apiClient.GetCompaniesAsync().ContinueWith(task =>
             {
                 if (task.Exception != null)
@@ -67,6 +69,16 @@ internal partial class CameraForm : Form
 
                 Invoke(AddCompanies);
             });
+			//Post users on start that were saved offline
+            foreach (string fileName in Directory.GetFiles(Directory.GetCurrentDirectory(), "*.json"))
+            {
+                if (fileName.Contains("_")&&!fileName.Contains("runtimeconfig")&&!fileName.Contains("deps"))
+                {
+                    User userFromFile = JsonSerializer.Deserialize<User>(File.ReadAllText(fileName));
+                    _apiClient.PostUserAsync(userFromFile);
+                    File.Delete(fileName);
+                }
+            }
         }
 
 		
