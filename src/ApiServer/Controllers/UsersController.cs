@@ -25,6 +25,7 @@ public class UsersController : ControllerBase
 		var users = await _context.Users
 			.Include(u => u.Address)
             .Include(u => u.Company)
+				.ThenInclude(ca => ca!.Address)
             .Include(u => u.Interests)
 			.ToListAsync();
 
@@ -38,6 +39,8 @@ public class UsersController : ControllerBase
 		var user = await _context.Users
 			.Where(u => u.Id == id)
 			.Include(u => u.Address)
+			.Include(u => u.Company)
+				.ThenInclude(ca => ca!.Address)
 			.Include(ui => ui.Interests)
 			.FirstOrDefaultAsync();
 
