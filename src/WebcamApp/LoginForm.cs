@@ -14,10 +14,11 @@ internal partial class LoginForm : Form
 {
 	public LoginForm()
 	{
+		ApiClient = null;
 		InitializeComponent();
 	}
 
-	public ApiClient ApiClient { get; private set; }
+	public ApiClient? ApiClient { get; private set; }
 
 	private async void Login_Click(object sender, EventArgs e)
 	{
@@ -54,7 +55,6 @@ internal partial class LoginForm : Form
 
     private void button1_Click(object sender, EventArgs e)
     {
-		ApiClient = null;
 		DialogResult = DialogResult.OK;
 		Close();
     }
