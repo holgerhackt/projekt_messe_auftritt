@@ -10,7 +10,7 @@ using Models.Authentication;
 namespace ApiServer.Controllers;
 
 [Route("api/[controller]")]
-public class AccountController : Controller
+public class AccountController : ControllerBase
 {
 	private readonly IConfiguration _configuration;
 	private readonly UserManager<Account> _userManager;

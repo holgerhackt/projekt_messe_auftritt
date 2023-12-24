@@ -13,6 +13,14 @@ internal static class Program
 	{
 		Application.EnableVisualStyles();
 		Application.SetCompatibleTextRenderingDefault(false);
-		Application.Run(new CameraForm());
+		try
+		{
+			Application.Run(new CameraForm());
+		}
+		catch (ObjectDisposedException cancelButtonPressed)
+		{
+			//Error handling for the case that the user pressed the cancel button
+		}
+
 	}
 }
