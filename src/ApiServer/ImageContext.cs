@@ -24,5 +24,19 @@ public class ImageContext : IdentityDbContext<Account>
 		options.UseSqlite(Configuration.GetConnectionString("TestDatabase"));
 	}
 
-	
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		base.OnModelCreating(modelBuilder);
+		modelBuilder.Entity<Company>()
+			.HasOne(c => c.Address)
+			.WithOne() 
+			.HasForeignKey<Company>(c => c.AddressId)
+			.OnDelete(DeleteBehavior.Cascade); 
+		
+		modelBuilder.Entity<User>()
+			.HasOne(c => c.Company)
+			.WithMany()
+			.HasForeignKey(u => u.CompanyId)
+			.OnDelete(DeleteBehavior.SetNull);
+	}
 }

@@ -55,19 +55,9 @@ public class UsersController : ControllerBase
 	[HttpPost]
 	public async Task<ActionResult> PostImage(UserDto userDto)
 	{
-		var databaseUser = _mapper.Map<User>(userDto);
-		
+		User databaseUser = _mapper.Map<User>(userDto);
 		FindAndAddInterests(userDto.Interests, databaseUser);
-
-		var companies = await _context.Company.ToListAsync();
-		if(userDto.Company != null)
-		{
-			foreach(Company c in companies)
-			{
-				if(userDto.Company.Id == c.Id) userDto.Company= c;
-			}
-		}
-		
+		if (userDto.Company != null) FindAndAddCompany(userDto.Company.Id, databaseUser);
 		var resUser = await _context.Users.AddAsync(databaseUser);
 		await _context.SaveChangesAsync();
 
@@ -84,6 +74,19 @@ public class UsersController : ControllerBase
 			{
 				databaseUser.Interests.Add(foundInterest);
 			}
+		}
+	}
+	private void FindAndAddCompany(int companyId, User databaseUser)
+	{
+		Company foundCompany = _context.Company.FirstOrDefault(company => company.Id == companyId);
+
+		if (foundCompany != null)
+		{
+			databaseUser.Company = foundCompany;
+		}
+		else
+		{
+			databaseUser.Company = null;
 		}
 	}
 

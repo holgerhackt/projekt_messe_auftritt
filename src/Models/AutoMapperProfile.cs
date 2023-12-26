@@ -12,7 +12,7 @@ public class AutoMapperProfile: Profile
             .ForMember(dst => dst.Address, opt => opt.MapFrom(src => src.Address))
             .ForMember(dst => dst.Interests, opt => opt.MapFrom(src => src.Interests.Select(i => i.Id)));
         CreateMap<UserDto, User>()
-            .ForMember(dst => dst.Interests, opt => opt.Ignore());
+            .ForMember(dst => dst.Interests, opt => opt.Ignore()); //Because of manual mapping
         
         CreateMap<Address, AddressDto>();
         CreateMap<AddressDto, Address>();

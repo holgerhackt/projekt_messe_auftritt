@@ -110,10 +110,10 @@ internal partial class LoginForm : Form
         if (_context.Users.Any())
         {
             List<User> users = await _context.Users
-                .AsNoTracking()  // very important to avoid tracking errors
+                .AsNoTracking()  // very important to avoid tracking errors especially with the interests
                 .Include(u => u.Address)
                 .Include(u => u.Company)
-                .ThenInclude(ca => ca!.Address)
+                    .ThenInclude(ca => ca!.Address)
                 .Include(u => u.Interests)
                 .ToListAsync();
             List<Task> tasks = new List<Task>();
@@ -126,8 +126,6 @@ internal partial class LoginForm : Form
             await Task.WhenAll(tasks);
         }
     }
-
-
     
 
     private void PasswordTextBox_KeyDown(object sender, KeyEventArgs e)

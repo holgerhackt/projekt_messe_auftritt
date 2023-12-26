@@ -136,12 +136,11 @@ internal partial class CameraForm : Form
     {
         try
         {
-            List<int> interestIds = interestsCheckedListBox.CheckedItems.Cast<Interest>().Select(i => i.Id).ToList();  
-            UserDto userDto = new UserDto()
+            User user = new User()
             {
                 Name = textBoxName.Text,
                 Image = _image,
-                Address = new AddressDto()
+                Address = new Address()
                 {
                     Country = textBoxCountry.Text,
                     City = textBoxCity.Text,
@@ -149,48 +148,18 @@ internal partial class CameraForm : Form
                     Street = textBoxStreet.Text,
                     HouseNumber = textBoxHousenumber.Text
                 },
-                Interests = interestIds
+                Interests = interestsCheckedListBox.CheckedItems.Cast<Interest>().ToList(),
+                Company = companyCheckedListBox.CheckedItems.Cast<Company>().SingleOrDefault()
             };
-            /*if (companyCheckedListBox.CheckedItems.Count == 1)
-            {
-                requestData = new User
-                {
-                    Name = textBoxName.Text,
-                    Image = _image,
-                    Address = new Address
-                    {
-                        Country = textBoxCountry.Text,
-                        City = textBoxCity.Text,
-                        PostalCode = textBoxPostcode.Text,
-                        Street = textBoxStreet.Text,
-                        HouseNumber = textBoxHousenumber.Text
-                    },
-                    Interests = new List<Interest>(),
-                    Company = (Company)companyCheckedListBox.CheckedItems[0]
-                };
-            }*/
-            User user = _mapper.Map<User>(userDto);  // A User Dto is initialized before to avoid unique constraint errors
-            FindAndAddInterests(interestIds, user);
             var dbUser = _context.Add(user);
             await _context.SaveChangesAsync();
-            string text = string.Format(Resources.UserCreationSuccessText, dbUser.Entity.Name);
+            
+            string text = string.Format(Resources.UserCreationSuccessText, user.Name);
             MessageBox.Show(text, Resources.UserCreationSuccessCaption);
         }
         catch (Exception ex)
         {
             MessageBox.Show(ex.Message);
-        }
-    }
-    private void FindAndAddInterests(List<int> interestIds, User databaseUser)
-    {
-        foreach (int interestId in interestIds)
-        {
-            Interest foundInterest = _context.Interests.FirstOrDefault(interest => interest.Id == interestId);
-
-            if (foundInterest != null)
-            {
-                databaseUser.Interests.Add(foundInterest);
-            }
         }
     }
 }
