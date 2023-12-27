@@ -48,7 +48,23 @@
             interestsCheckedListBox = new System.Windows.Forms.CheckedListBox();
             companyCheckedListBox = new System.Windows.Forms.CheckedListBox();
             Submit = new System.Windows.Forms.Button();
+            NewCompanyBtn = new System.Windows.Forms.Button();
+            NewCompanyPnl = new System.Windows.Forms.Panel();
+            NewCompanyNameLbl = new System.Windows.Forms.Label();
+            CompanyNameTxtBox = new System.Windows.Forms.TextBox();
+            CompanyCountryLbl = new System.Windows.Forms.Label();
+            CompanyCountryTxtBox = new System.Windows.Forms.TextBox();
+            CompanyPostalLbl = new System.Windows.Forms.Label();
+            CompanyPostalTxtBox = new System.Windows.Forms.TextBox();
+            CompanyCityLbl = new System.Windows.Forms.Label();
+            CompanyCityTxtBox = new System.Windows.Forms.TextBox();
+            CompanyStreetLbl = new System.Windows.Forms.Label();
+            CompanyStreetTxtBox = new System.Windows.Forms.TextBox();
+            CompanyHouseNrLbl = new System.Windows.Forms.Label();
+            CompanyHouseNrTxtBox = new System.Windows.Forms.TextBox();
+            AddNewCompanyBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            NewCompanyPnl.SuspendLayout();
             SuspendLayout();
             // 
             // cboCamera
@@ -248,7 +264,7 @@
             // Submit
             // 
             Submit.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            Submit.Location = new System.Drawing.Point(1178, 708);
+            Submit.Location = new System.Drawing.Point(733, 708);
             Submit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Submit.Name = "Submit";
             Submit.Size = new System.Drawing.Size(88, 27);
@@ -258,11 +274,150 @@
             Submit.UseVisualStyleBackColor = true;
             Submit.Click += Submit_Click;
             // 
+            // NewCompanyBtn
+            // 
+            NewCompanyBtn.Location = new System.Drawing.Point(1222, 710);
+            NewCompanyBtn.Name = "NewCompanyBtn";
+            NewCompanyBtn.Size = new System.Drawing.Size(110, 23);
+            NewCompanyBtn.TabIndex = 21;
+            NewCompanyBtn.Text = "New Company";
+            NewCompanyBtn.UseVisualStyleBackColor = true;
+            NewCompanyBtn.Click += NewCompanyBtn_Click;
+            // 
+            // NewCompanyPnl
+            // 
+            NewCompanyPnl.Controls.Add(AddNewCompanyBtn);
+            NewCompanyPnl.Controls.Add(CompanyHouseNrTxtBox);
+            NewCompanyPnl.Controls.Add(CompanyHouseNrLbl);
+            NewCompanyPnl.Controls.Add(CompanyStreetTxtBox);
+            NewCompanyPnl.Controls.Add(CompanyStreetLbl);
+            NewCompanyPnl.Controls.Add(CompanyCityTxtBox);
+            NewCompanyPnl.Controls.Add(CompanyCityLbl);
+            NewCompanyPnl.Controls.Add(CompanyPostalTxtBox);
+            NewCompanyPnl.Controls.Add(CompanyPostalLbl);
+            NewCompanyPnl.Controls.Add(CompanyCountryTxtBox);
+            NewCompanyPnl.Controls.Add(CompanyCountryLbl);
+            NewCompanyPnl.Controls.Add(CompanyNameTxtBox);
+            NewCompanyPnl.Controls.Add(NewCompanyNameLbl);
+            NewCompanyPnl.Location = new System.Drawing.Point(1222, 392);
+            NewCompanyPnl.Name = "NewCompanyPnl";
+            NewCompanyPnl.Size = new System.Drawing.Size(298, 310);
+            NewCompanyPnl.TabIndex = 22;
+            NewCompanyPnl.Visible = false;
+            // 
+            // NewCompanyNameLbl
+            // 
+            NewCompanyNameLbl.AutoSize = true;
+            NewCompanyNameLbl.Location = new System.Drawing.Point(3, 10);
+            NewCompanyNameLbl.Name = "NewCompanyNameLbl";
+            NewCompanyNameLbl.Size = new System.Drawing.Size(94, 15);
+            NewCompanyNameLbl.TabIndex = 0;
+            NewCompanyNameLbl.Text = "Company Name";
+            // 
+            // CompanyNameTxtBox
+            // 
+            CompanyNameTxtBox.Location = new System.Drawing.Point(3, 28);
+            CompanyNameTxtBox.Name = "CompanyNameTxtBox";
+            CompanyNameTxtBox.Size = new System.Drawing.Size(292, 23);
+            CompanyNameTxtBox.TabIndex = 1;
+            // 
+            // CompanyCountryLbl
+            // 
+            CompanyCountryLbl.AutoSize = true;
+            CompanyCountryLbl.Location = new System.Drawing.Point(3, 54);
+            CompanyCountryLbl.Name = "CompanyCountryLbl";
+            CompanyCountryLbl.Size = new System.Drawing.Size(50, 15);
+            CompanyCountryLbl.TabIndex = 2;
+            CompanyCountryLbl.Text = "Country";
+            // 
+            // CompanyCountryTxtBox
+            // 
+            CompanyCountryTxtBox.Location = new System.Drawing.Point(3, 72);
+            CompanyCountryTxtBox.Name = "CompanyCountryTxtBox";
+            CompanyCountryTxtBox.Size = new System.Drawing.Size(292, 23);
+            CompanyCountryTxtBox.TabIndex = 3;
+            // 
+            // CompanyPostalLbl
+            // 
+            CompanyPostalLbl.AutoSize = true;
+            CompanyPostalLbl.Location = new System.Drawing.Point(3, 98);
+            CompanyPostalLbl.Name = "CompanyPostalLbl";
+            CompanyPostalLbl.Size = new System.Drawing.Size(65, 15);
+            CompanyPostalLbl.TabIndex = 4;
+            CompanyPostalLbl.Text = "Postalcode";
+            // 
+            // CompanyPostalTxtBox
+            // 
+            CompanyPostalTxtBox.Location = new System.Drawing.Point(3, 116);
+            CompanyPostalTxtBox.Name = "CompanyPostalTxtBox";
+            CompanyPostalTxtBox.Size = new System.Drawing.Size(68, 23);
+            CompanyPostalTxtBox.TabIndex = 5;
+            // 
+            // CompanyCityLbl
+            // 
+            CompanyCityLbl.AutoSize = true;
+            CompanyCityLbl.Location = new System.Drawing.Point(74, 98);
+            CompanyCityLbl.Name = "CompanyCityLbl";
+            CompanyCityLbl.Size = new System.Drawing.Size(28, 15);
+            CompanyCityLbl.TabIndex = 6;
+            CompanyCityLbl.Text = "City";
+            // 
+            // CompanyCityTxtBox
+            // 
+            CompanyCityTxtBox.Location = new System.Drawing.Point(74, 116);
+            CompanyCityTxtBox.Name = "CompanyCityTxtBox";
+            CompanyCityTxtBox.Size = new System.Drawing.Size(221, 23);
+            CompanyCityTxtBox.TabIndex = 7;
+            // 
+            // CompanyStreetLbl
+            // 
+            CompanyStreetLbl.AutoSize = true;
+            CompanyStreetLbl.Location = new System.Drawing.Point(3, 142);
+            CompanyStreetLbl.Name = "CompanyStreetLbl";
+            CompanyStreetLbl.Size = new System.Drawing.Size(37, 15);
+            CompanyStreetLbl.TabIndex = 8;
+            CompanyStreetLbl.Text = "Street";
+            // 
+            // CompanyStreetTxtBox
+            // 
+            CompanyStreetTxtBox.Location = new System.Drawing.Point(3, 160);
+            CompanyStreetTxtBox.Name = "CompanyStreetTxtBox";
+            CompanyStreetTxtBox.Size = new System.Drawing.Size(210, 23);
+            CompanyStreetTxtBox.TabIndex = 9;
+            // 
+            // CompanyHouseNrLbl
+            // 
+            CompanyHouseNrLbl.AutoSize = true;
+            CompanyHouseNrLbl.Location = new System.Drawing.Point(212, 142);
+            CompanyHouseNrLbl.Name = "CompanyHouseNrLbl";
+            CompanyHouseNrLbl.Size = new System.Drawing.Size(83, 15);
+            CompanyHouseNrLbl.TabIndex = 10;
+            CompanyHouseNrLbl.Text = "Housenumber";
+            // 
+            // CompanyHouseNrTxtBox
+            // 
+            CompanyHouseNrTxtBox.Location = new System.Drawing.Point(218, 160);
+            CompanyHouseNrTxtBox.Name = "CompanyHouseNrTxtBox";
+            CompanyHouseNrTxtBox.Size = new System.Drawing.Size(77, 23);
+            CompanyHouseNrTxtBox.TabIndex = 11;
+            // 
+            // AddNewCompanyBtn
+            // 
+            AddNewCompanyBtn.Location = new System.Drawing.Point(3, 200);
+            AddNewCompanyBtn.Name = "AddNewCompanyBtn";
+            AddNewCompanyBtn.Size = new System.Drawing.Size(75, 23);
+            AddNewCompanyBtn.TabIndex = 12;
+            AddNewCompanyBtn.Text = "Add";
+            AddNewCompanyBtn.UseVisualStyleBackColor = true;
+            AddNewCompanyBtn.Click += AddNewCompanyBtn_Click;
+            // 
             // CameraForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1520, 742);
+            Controls.Add(NewCompanyPnl);
+            Controls.Add(NewCompanyBtn);
             Controls.Add(Submit);
             Controls.Add(companyCheckedListBox);
             Controls.Add(interestsCheckedListBox);
@@ -289,6 +444,8 @@
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            NewCompanyPnl.ResumeLayout(false);
+            NewCompanyPnl.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -315,6 +472,21 @@
         private System.Windows.Forms.CheckedListBox interestsCheckedListBox;
         private System.Windows.Forms.CheckedListBox companyCheckedListBox;
         private System.Windows.Forms.Button Submit;
+        private System.Windows.Forms.Button NewCompanyBtn;
+        private System.Windows.Forms.Panel NewCompanyPnl;
+        private System.Windows.Forms.Label NewCompanyNameLbl;
+        private System.Windows.Forms.Label CompanyCountryLbl;
+        private System.Windows.Forms.TextBox CompanyNameTxtBox;
+        private System.Windows.Forms.Button AddNewCompanyBtn;
+        private System.Windows.Forms.TextBox CompanyHouseNrTxtBox;
+        private System.Windows.Forms.Label CompanyHouseNrLbl;
+        private System.Windows.Forms.TextBox CompanyStreetTxtBox;
+        private System.Windows.Forms.Label CompanyStreetLbl;
+        private System.Windows.Forms.TextBox CompanyCityTxtBox;
+        private System.Windows.Forms.Label CompanyCityLbl;
+        private System.Windows.Forms.TextBox CompanyPostalTxtBox;
+        private System.Windows.Forms.Label CompanyPostalLbl;
+        private System.Windows.Forms.TextBox CompanyCountryTxtBox;
     }
 }
 

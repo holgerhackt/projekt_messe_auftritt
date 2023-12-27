@@ -57,7 +57,7 @@ public class UsersController : ControllerBase
 	{
 		User databaseUser = _mapper.Map<User>(userDto);
 		FindAndAddInterests(userDto.Interests, databaseUser);
-		if (userDto.Company != null) FindAndAddCompany(userDto.Company.Id, databaseUser);
+		if (userDto.Company != null) FindAndAddCompany(userDto.Company, databaseUser);
 		var resUser = await _context.Users.AddAsync(databaseUser);
 		await _context.SaveChangesAsync();
 
@@ -76,9 +76,9 @@ public class UsersController : ControllerBase
 			}
 		}
 	}
-	private void FindAndAddCompany(int companyId, User databaseUser)
+	private void FindAndAddCompany(Company companyToAdd, User databaseUser)
 	{
-		Company foundCompany = _context.Company.FirstOrDefault(company => company.Id == companyId);
+		Company foundCompany = _context.Company.FirstOrDefault(company => company.Id == companyToAdd.Id);
 
 		if (foundCompany != null)
 		{
@@ -86,7 +86,20 @@ public class UsersController : ControllerBase
 		}
 		else
 		{
-			databaseUser.Company = null;
+			//Adding the company to db that was created on client side
+			_context.Company.Add(new Company
+			{
+				Name = companyToAdd.Name,
+				Address = new Address { 
+					Country = companyToAdd.Address.Country,
+					City = companyToAdd.Address.City,
+					PostalCode = companyToAdd.Address.PostalCode,
+					HouseNumber	= companyToAdd.Address.HouseNumber,
+					Street = companyToAdd.Address.Street,
+				}
+			});
+            foundCompany = _context.Company.FirstOrDefault(company => company.Id == companyToAdd.Id);
+            databaseUser.Company = foundCompany;
 		}
 	}
 

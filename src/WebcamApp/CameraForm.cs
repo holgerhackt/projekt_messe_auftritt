@@ -37,19 +37,19 @@ internal partial class CameraForm : Form
     public CameraForm()
     {
         InitializeComponent();
-        
+
         var loginForm = new LoginForm();
         if (loginForm.ShowDialog() != DialogResult.OK)
         {
             Close();
             return;
         }
-        
+
         _context = new OfflineContext();
         FillCheckedListBoxes();
     }
 
-    
+
     private void FillCheckedListBoxes()
     {
         interestsCheckedListBox.DisplayMember = nameof(Interest.Name);
@@ -153,7 +153,7 @@ internal partial class CameraForm : Form
             };
             var dbUser = _context.Add(user);
             await _context.SaveChangesAsync();
-            
+
             string text = string.Format(Resources.UserCreationSuccessText, user.Name);
             MessageBox.Show(text, Resources.UserCreationSuccessCaption);
         }
@@ -161,5 +161,68 @@ internal partial class CameraForm : Form
         {
             MessageBox.Show(ex.Message);
         }
+    }
+
+    private void NewCompanyBtn_Click(object sender, EventArgs e)
+    {
+        NewCompanyPnl.Visible = true;
+        NewCompanyBtn.Visible = false;
+    }
+
+    private void AddNewCompanyBtn_Click(object sender, EventArgs e)
+    {
+        //Return if duplicate
+        foreach (var item in companyCheckedListBox.Items)
+        {
+            if (item is Company cmp && cmp.Name == CompanyNameTxtBox.Text)
+            {
+                CompanyNameTxtBox.ResetText();
+                CompanyCountryTxtBox.ResetText();
+                CompanyCityTxtBox.ResetText();
+                CompanyPostalTxtBox.ResetText();
+                CompanyStreetTxtBox.ResetText();
+                CompanyHouseNrTxtBox.ResetText();
+
+                NewCompanyPnl.Visible = false;
+                NewCompanyBtn.Visible = true;
+                return;
+            }
+        }
+
+        Company company = new Company()
+        {
+            Name = CompanyNameTxtBox.Text,
+            Address = new Address()
+            {
+                Country = CompanyCountryTxtBox.Text,
+                City = CompanyCityTxtBox.Text,
+                PostalCode = CompanyPostalTxtBox.Text,
+                Street = CompanyStreetTxtBox.Text,
+                HouseNumber = CompanyHouseNrTxtBox.Text
+            }
+        };
+
+        var dbUser = _context.Add(company);
+        _context.SaveChangesAsync();
+
+        companyCheckedListBox.Items.Clear();
+        var _companies = _context.Company.ToList();
+        foreach (var comp in _companies) companyCheckedListBox.Items.Add(comp);
+
+        //Checkbox ticked for newly added company
+        for(int i= 0; i<companyCheckedListBox.Items.Count;i++)
+        {
+            if (companyCheckedListBox.Items[i] is Company cmp && cmp.Name == company.Name) companyCheckedListBox.SetItemChecked(i, true);
+        }
+
+        CompanyNameTxtBox.ResetText();
+        CompanyCountryTxtBox.ResetText();
+        CompanyCityTxtBox.ResetText();
+        CompanyPostalTxtBox.ResetText();
+        CompanyStreetTxtBox.ResetText();
+        CompanyHouseNrTxtBox.ResetText();
+
+        NewCompanyPnl.Visible = false;
+        NewCompanyBtn.Visible = true;
     }
 }
