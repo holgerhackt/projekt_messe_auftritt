@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.EntityFrameworkCore;
 using Models;
+using Models.DTOs;
 
 namespace ApiServer.Controllers;
 
@@ -12,7 +14,7 @@ namespace ApiServer.Controllers;
 public class UsersController : ControllerBase
 {
 	private readonly ImageContext _context;
-
+	private readonly IMapper _mapper = AutoMapperConfiguration.Configure();
 	public UsersController(ImageContext context)
 	{
 		_context = context;
@@ -51,35 +53,41 @@ public class UsersController : ControllerBase
 
 	// POST: api/Users
 	[HttpPost]
-	public async Task<ActionResult> PostImage(User user)
+	public async Task<ActionResult> PostImage(UserDto userDto)
 	{
-		var interests = await _context.Interests.ToListAsync();
-        var companies = await _context.Company.ToListAsync();
-        //user.Interests = interests.Where(user.Interests.Contains).ToList();
-
-        foreach (var interest in interests)
-		{
-			for (int i= 0;i < user.Interests.Count;i++)
-			{
-				if(interest.Id == user.Interests[i].Id)
-				{
-                    user.Interests[i] = interest;
-				}
-			}
-		}
-
-		if(user.Company != null)
-		{
-			foreach(Company c in companies)
-			{
-				if(user.Company.Id == c.Id) user.Company= c;
-			}
-		}
-
-		var resUser = await _context.Users.AddAsync(user);
+		User databaseUser = _mapper.Map<User>(userDto);
+		FindAndAddInterests(userDto.Interests, databaseUser);
+		if (userDto.Company != null) FindAndAddCompany(userDto.Company.Id, databaseUser);
+		var resUser = await _context.Users.AddAsync(databaseUser);
 		await _context.SaveChangesAsync();
 
-		return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+		return CreatedAtAction(nameof(GetUser), new { id = databaseUser.Id }, databaseUser);
+	}
+
+	private void FindAndAddInterests(List<int> interestIds, User databaseUser)
+	{
+		foreach (int interestId in interestIds)
+		{
+			Interest foundInterest = _context.Interests.FirstOrDefault(interest => interest.Id == interestId);
+
+			if (foundInterest != null)
+			{
+				databaseUser.Interests.Add(foundInterest);
+			}
+		}
+	}
+	private void FindAndAddCompany(int companyId, User databaseUser)
+	{
+		Company foundCompany = _context.Company.FirstOrDefault(company => company.Id == companyId);
+
+		if (foundCompany != null)
+		{
+			databaseUser.Company = foundCompany;
+		}
+		else
+		{
+			databaseUser.Company = null;
+		}
 	}
 
 	// DELETE: api/Users/5
