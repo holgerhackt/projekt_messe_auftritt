@@ -29,6 +29,7 @@ internal partial class LoginForm : Form
     public LoginForm()
     {
         _context = new OfflineContext();
+        _context.Database.EnsureCreatedAsync();
         InitializeComponent();
         try
         {
