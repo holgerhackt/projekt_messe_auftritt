@@ -45,6 +45,7 @@
             Login.Enabled = false;
             Login.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(90, 90, 90);
             Login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            Login.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             Login.ForeColor = System.Drawing.Color.White;
             Login.Image = (System.Drawing.Image)resources.GetObject("Login.Image");
             Login.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -88,22 +89,24 @@
             // UsernameLabel
             // 
             UsernameLabel.AutoSize = true;
+            UsernameLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             UsernameLabel.ForeColor = System.Drawing.Color.White;
             UsernameLabel.Location = new System.Drawing.Point(175, 67);
             UsernameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             UsernameLabel.Name = "UsernameLabel";
-            UsernameLabel.Size = new System.Drawing.Size(60, 15);
+            UsernameLabel.Size = new System.Drawing.Size(63, 14);
             UsernameLabel.TabIndex = 4;
             UsernameLabel.Text = "Username";
             // 
             // PasswordLabel
             // 
             PasswordLabel.AutoSize = true;
+            PasswordLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             PasswordLabel.ForeColor = System.Drawing.Color.White;
             PasswordLabel.Location = new System.Drawing.Point(178, 105);
             PasswordLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             PasswordLabel.Name = "PasswordLabel";
-            PasswordLabel.Size = new System.Drawing.Size(57, 15);
+            PasswordLabel.Size = new System.Drawing.Size(59, 14);
             PasswordLabel.TabIndex = 5;
             PasswordLabel.Text = "Password";
             // 
@@ -112,6 +115,7 @@
             StartApp.BackColor = System.Drawing.Color.FromArgb(61, 61, 61);
             StartApp.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(90, 90, 90);
             StartApp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            StartApp.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             StartApp.ForeColor = System.Drawing.Color.White;
             StartApp.Image = (System.Drawing.Image)resources.GetObject("StartApp.Image");
             StartApp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;

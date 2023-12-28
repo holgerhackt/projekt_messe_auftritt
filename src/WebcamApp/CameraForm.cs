@@ -189,6 +189,8 @@ internal partial class CameraForm : Form
             }
         }
 
+        if (CompanyNameTxtBox.Text == "") return;
+
         Company company = new Company()
         {
             Name = CompanyNameTxtBox.Text,
@@ -210,7 +212,7 @@ internal partial class CameraForm : Form
         foreach (var comp in _companies) companyCheckedListBox.Items.Add(comp);
 
         //Checkbox ticked for newly added company
-        for(int i= 0; i<companyCheckedListBox.Items.Count;i++)
+        for (int i = 0; i < companyCheckedListBox.Items.Count; i++)
         {
             if (companyCheckedListBox.Items[i] is Company cmp && cmp.Name == company.Name) companyCheckedListBox.SetItemChecked(i, true);
         }
