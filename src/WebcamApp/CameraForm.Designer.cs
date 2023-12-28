@@ -50,19 +50,19 @@
             Submit = new System.Windows.Forms.Button();
             NewCompanyBtn = new System.Windows.Forms.Button();
             NewCompanyPnl = new System.Windows.Forms.Panel();
-            NewCompanyNameLbl = new System.Windows.Forms.Label();
-            CompanyNameTxtBox = new System.Windows.Forms.TextBox();
-            CompanyCountryLbl = new System.Windows.Forms.Label();
-            CompanyCountryTxtBox = new System.Windows.Forms.TextBox();
-            CompanyPostalLbl = new System.Windows.Forms.Label();
-            CompanyPostalTxtBox = new System.Windows.Forms.TextBox();
-            CompanyCityLbl = new System.Windows.Forms.Label();
-            CompanyCityTxtBox = new System.Windows.Forms.TextBox();
-            CompanyStreetLbl = new System.Windows.Forms.Label();
-            CompanyStreetTxtBox = new System.Windows.Forms.TextBox();
-            CompanyHouseNrLbl = new System.Windows.Forms.Label();
-            CompanyHouseNrTxtBox = new System.Windows.Forms.TextBox();
             AddNewCompanyBtn = new System.Windows.Forms.Button();
+            CompanyHouseNrTxtBox = new System.Windows.Forms.TextBox();
+            CompanyHouseNrLbl = new System.Windows.Forms.Label();
+            CompanyStreetTxtBox = new System.Windows.Forms.TextBox();
+            CompanyStreetLbl = new System.Windows.Forms.Label();
+            CompanyCityTxtBox = new System.Windows.Forms.TextBox();
+            CompanyCityLbl = new System.Windows.Forms.Label();
+            CompanyPostalTxtBox = new System.Windows.Forms.TextBox();
+            CompanyPostalLbl = new System.Windows.Forms.Label();
+            CompanyCountryTxtBox = new System.Windows.Forms.TextBox();
+            CompanyCountryLbl = new System.Windows.Forms.Label();
+            CompanyNameTxtBox = new System.Windows.Forms.TextBox();
+            NewCompanyNameLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             NewCompanyPnl.SuspendLayout();
             SuspendLayout();
@@ -305,85 +305,22 @@
             NewCompanyPnl.TabIndex = 22;
             NewCompanyPnl.Visible = false;
             // 
-            // NewCompanyNameLbl
+            // AddNewCompanyBtn
             // 
-            NewCompanyNameLbl.AutoSize = true;
-            NewCompanyNameLbl.Location = new System.Drawing.Point(3, 10);
-            NewCompanyNameLbl.Name = "NewCompanyNameLbl";
-            NewCompanyNameLbl.Size = new System.Drawing.Size(94, 15);
-            NewCompanyNameLbl.TabIndex = 0;
-            NewCompanyNameLbl.Text = "Company Name";
+            AddNewCompanyBtn.Location = new System.Drawing.Point(3, 200);
+            AddNewCompanyBtn.Name = "AddNewCompanyBtn";
+            AddNewCompanyBtn.Size = new System.Drawing.Size(75, 23);
+            AddNewCompanyBtn.TabIndex = 12;
+            AddNewCompanyBtn.Text = "Add";
+            AddNewCompanyBtn.UseVisualStyleBackColor = true;
+            AddNewCompanyBtn.Click += AddNewCompanyBtn_Click;
             // 
-            // CompanyNameTxtBox
+            // CompanyHouseNrTxtBox
             // 
-            CompanyNameTxtBox.Location = new System.Drawing.Point(3, 28);
-            CompanyNameTxtBox.Name = "CompanyNameTxtBox";
-            CompanyNameTxtBox.Size = new System.Drawing.Size(292, 23);
-            CompanyNameTxtBox.TabIndex = 1;
-            // 
-            // CompanyCountryLbl
-            // 
-            CompanyCountryLbl.AutoSize = true;
-            CompanyCountryLbl.Location = new System.Drawing.Point(3, 54);
-            CompanyCountryLbl.Name = "CompanyCountryLbl";
-            CompanyCountryLbl.Size = new System.Drawing.Size(50, 15);
-            CompanyCountryLbl.TabIndex = 2;
-            CompanyCountryLbl.Text = "Country";
-            // 
-            // CompanyCountryTxtBox
-            // 
-            CompanyCountryTxtBox.Location = new System.Drawing.Point(3, 72);
-            CompanyCountryTxtBox.Name = "CompanyCountryTxtBox";
-            CompanyCountryTxtBox.Size = new System.Drawing.Size(292, 23);
-            CompanyCountryTxtBox.TabIndex = 3;
-            // 
-            // CompanyPostalLbl
-            // 
-            CompanyPostalLbl.AutoSize = true;
-            CompanyPostalLbl.Location = new System.Drawing.Point(3, 98);
-            CompanyPostalLbl.Name = "CompanyPostalLbl";
-            CompanyPostalLbl.Size = new System.Drawing.Size(65, 15);
-            CompanyPostalLbl.TabIndex = 4;
-            CompanyPostalLbl.Text = "Postalcode";
-            // 
-            // CompanyPostalTxtBox
-            // 
-            CompanyPostalTxtBox.Location = new System.Drawing.Point(3, 116);
-            CompanyPostalTxtBox.Name = "CompanyPostalTxtBox";
-            CompanyPostalTxtBox.Size = new System.Drawing.Size(68, 23);
-            CompanyPostalTxtBox.TabIndex = 5;
-            // 
-            // CompanyCityLbl
-            // 
-            CompanyCityLbl.AutoSize = true;
-            CompanyCityLbl.Location = new System.Drawing.Point(74, 98);
-            CompanyCityLbl.Name = "CompanyCityLbl";
-            CompanyCityLbl.Size = new System.Drawing.Size(28, 15);
-            CompanyCityLbl.TabIndex = 6;
-            CompanyCityLbl.Text = "City";
-            // 
-            // CompanyCityTxtBox
-            // 
-            CompanyCityTxtBox.Location = new System.Drawing.Point(74, 116);
-            CompanyCityTxtBox.Name = "CompanyCityTxtBox";
-            CompanyCityTxtBox.Size = new System.Drawing.Size(221, 23);
-            CompanyCityTxtBox.TabIndex = 7;
-            // 
-            // CompanyStreetLbl
-            // 
-            CompanyStreetLbl.AutoSize = true;
-            CompanyStreetLbl.Location = new System.Drawing.Point(3, 142);
-            CompanyStreetLbl.Name = "CompanyStreetLbl";
-            CompanyStreetLbl.Size = new System.Drawing.Size(37, 15);
-            CompanyStreetLbl.TabIndex = 8;
-            CompanyStreetLbl.Text = "Street";
-            // 
-            // CompanyStreetTxtBox
-            // 
-            CompanyStreetTxtBox.Location = new System.Drawing.Point(3, 160);
-            CompanyStreetTxtBox.Name = "CompanyStreetTxtBox";
-            CompanyStreetTxtBox.Size = new System.Drawing.Size(210, 23);
-            CompanyStreetTxtBox.TabIndex = 9;
+            CompanyHouseNrTxtBox.Location = new System.Drawing.Point(218, 160);
+            CompanyHouseNrTxtBox.Name = "CompanyHouseNrTxtBox";
+            CompanyHouseNrTxtBox.Size = new System.Drawing.Size(77, 23);
+            CompanyHouseNrTxtBox.TabIndex = 11;
             // 
             // CompanyHouseNrLbl
             // 
@@ -394,22 +331,85 @@
             CompanyHouseNrLbl.TabIndex = 10;
             CompanyHouseNrLbl.Text = "Housenumber";
             // 
-            // CompanyHouseNrTxtBox
+            // CompanyStreetTxtBox
             // 
-            CompanyHouseNrTxtBox.Location = new System.Drawing.Point(218, 160);
-            CompanyHouseNrTxtBox.Name = "CompanyHouseNrTxtBox";
-            CompanyHouseNrTxtBox.Size = new System.Drawing.Size(77, 23);
-            CompanyHouseNrTxtBox.TabIndex = 11;
+            CompanyStreetTxtBox.Location = new System.Drawing.Point(3, 160);
+            CompanyStreetTxtBox.Name = "CompanyStreetTxtBox";
+            CompanyStreetTxtBox.Size = new System.Drawing.Size(210, 23);
+            CompanyStreetTxtBox.TabIndex = 9;
             // 
-            // AddNewCompanyBtn
+            // CompanyStreetLbl
             // 
-            AddNewCompanyBtn.Location = new System.Drawing.Point(3, 200);
-            AddNewCompanyBtn.Name = "AddNewCompanyBtn";
-            AddNewCompanyBtn.Size = new System.Drawing.Size(75, 23);
-            AddNewCompanyBtn.TabIndex = 12;
-            AddNewCompanyBtn.Text = "Add";
-            AddNewCompanyBtn.UseVisualStyleBackColor = true;
-            AddNewCompanyBtn.Click += AddNewCompanyBtn_Click;
+            CompanyStreetLbl.AutoSize = true;
+            CompanyStreetLbl.Location = new System.Drawing.Point(3, 142);
+            CompanyStreetLbl.Name = "CompanyStreetLbl";
+            CompanyStreetLbl.Size = new System.Drawing.Size(37, 15);
+            CompanyStreetLbl.TabIndex = 8;
+            CompanyStreetLbl.Text = "Street";
+            // 
+            // CompanyCityTxtBox
+            // 
+            CompanyCityTxtBox.Location = new System.Drawing.Point(74, 116);
+            CompanyCityTxtBox.Name = "CompanyCityTxtBox";
+            CompanyCityTxtBox.Size = new System.Drawing.Size(221, 23);
+            CompanyCityTxtBox.TabIndex = 7;
+            // 
+            // CompanyCityLbl
+            // 
+            CompanyCityLbl.AutoSize = true;
+            CompanyCityLbl.Location = new System.Drawing.Point(74, 98);
+            CompanyCityLbl.Name = "CompanyCityLbl";
+            CompanyCityLbl.Size = new System.Drawing.Size(28, 15);
+            CompanyCityLbl.TabIndex = 6;
+            CompanyCityLbl.Text = "City";
+            // 
+            // CompanyPostalTxtBox
+            // 
+            CompanyPostalTxtBox.Location = new System.Drawing.Point(3, 116);
+            CompanyPostalTxtBox.Name = "CompanyPostalTxtBox";
+            CompanyPostalTxtBox.Size = new System.Drawing.Size(68, 23);
+            CompanyPostalTxtBox.TabIndex = 5;
+            // 
+            // CompanyPostalLbl
+            // 
+            CompanyPostalLbl.AutoSize = true;
+            CompanyPostalLbl.Location = new System.Drawing.Point(3, 98);
+            CompanyPostalLbl.Name = "CompanyPostalLbl";
+            CompanyPostalLbl.Size = new System.Drawing.Size(65, 15);
+            CompanyPostalLbl.TabIndex = 4;
+            CompanyPostalLbl.Text = "Postalcode";
+            // 
+            // CompanyCountryTxtBox
+            // 
+            CompanyCountryTxtBox.Location = new System.Drawing.Point(3, 72);
+            CompanyCountryTxtBox.Name = "CompanyCountryTxtBox";
+            CompanyCountryTxtBox.Size = new System.Drawing.Size(292, 23);
+            CompanyCountryTxtBox.TabIndex = 3;
+            // 
+            // CompanyCountryLbl
+            // 
+            CompanyCountryLbl.AutoSize = true;
+            CompanyCountryLbl.Location = new System.Drawing.Point(3, 54);
+            CompanyCountryLbl.Name = "CompanyCountryLbl";
+            CompanyCountryLbl.Size = new System.Drawing.Size(50, 15);
+            CompanyCountryLbl.TabIndex = 2;
+            CompanyCountryLbl.Text = "Country";
+            // 
+            // CompanyNameTxtBox
+            // 
+            CompanyNameTxtBox.Location = new System.Drawing.Point(3, 28);
+            CompanyNameTxtBox.Name = "CompanyNameTxtBox";
+            CompanyNameTxtBox.Size = new System.Drawing.Size(292, 23);
+            CompanyNameTxtBox.TabIndex = 1;
+            // 
+            // NewCompanyNameLbl
+            // 
+            NewCompanyNameLbl.AutoSize = true;
+            NewCompanyNameLbl.Location = new System.Drawing.Point(3, 10);
+            NewCompanyNameLbl.Name = "NewCompanyNameLbl";
+            NewCompanyNameLbl.Size = new System.Drawing.Size(94, 15);
+            NewCompanyNameLbl.TabIndex = 0;
+            NewCompanyNameLbl.Text = "Company Name";
             // 
             // CameraForm
             // 
@@ -438,6 +438,7 @@
             Controls.Add(pictureBox1);
             Controls.Add(CameraLabel);
             Controls.Add(cboCamera);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "CameraForm";
             Text = "Form1";
