@@ -14,10 +14,11 @@ namespace ApiServer.Controllers;
 public class UsersController : ControllerBase
 {
 	private readonly ImageContext _context;
-	private readonly IMapper _mapper = AutoMapperConfiguration.Configure();
-	public UsersController(ImageContext context)
+	private readonly IMapper _mapper;
+	public UsersController(ImageContext context, IMapper mapper)
 	{
 		_context = context;
+		_mapper = mapper;
 	}
 
 	// GET: api/Users
