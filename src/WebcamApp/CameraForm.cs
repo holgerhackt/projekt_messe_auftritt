@@ -156,6 +156,7 @@ internal partial class CameraForm : Form
 
             string text = string.Format(Resources.UserCreationSuccessText, user.Name);
             MessageBox.Show(text, Resources.UserCreationSuccessCaption);
+            ClearInputFields();
         }
         catch (Exception ex)
         {
@@ -163,6 +164,22 @@ internal partial class CameraForm : Form
         }
     }
 
+    private void ClearInputFields()
+    {
+        panel2.Controls.OfType<TextBox>().ToList().ForEach(textBox => textBox.Clear());
+        var checkedIndices = companyCheckedListBox.CheckedIndices.Cast<int>().ToList();
+        foreach (var index in checkedIndices)
+        {
+            companyCheckedListBox.SetItemChecked(index, false);
+        }
+        checkedIndices = interestsCheckedListBox.CheckedIndices.Cast<int>().ToList();
+        foreach (var index in checkedIndices)
+        {
+            interestsCheckedListBox.SetItemChecked(index, false);
+        }
+        if (_videoCaptureDevice?.IsRunning == true) _videoCaptureDevice.SignalToStop();
+        pictureBox1.Image = null;
+    }
     private void NewCompanyBtn_Click(object sender, EventArgs e)
     {
         NewCompanyPnl.Visible = true;
