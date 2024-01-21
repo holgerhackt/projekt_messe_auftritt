@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.12)  21 JAN 2024 21:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.12)  21 JAN 2024 22:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2012,10 +2012,10 @@ Package pdftex.def Info: Images/Projekt_Messe_UseCase2.png  used on input line
 69.
 (pdftex.def)             Requested size: 412.56497pt x 372.20216pt.
  [16 <./Images/Projekt_Messe_UseCase2.png (PNG copy)>] [17]
-<Images/Projekt_Messe_Class1.png, id=242, 1616.0375pt x 1716.4125pt>
-File: Images/Projekt_Messe_Class1.png Graphic file (type png)
-<use Images/Projekt_Messe_Class1.png>
-Package pdftex.def Info: Images/Projekt_Messe_Class1.png  used on input line 10
+<Images/Projekt_Messe_Class2.png, id=242, 1616.0375pt x 1716.4125pt>
+File: Images/Projekt_Messe_Class2.png Graphic file (type png)
+<use Images/Projekt_Messe_Class2.png>
+Package pdftex.def Info: Images/Projekt_Messe_Class2.png  used on input line 10
 2.
 (pdftex.def)             Requested size: 453.82397pt x 482.0065pt.
 
@@ -2023,7 +2023,7 @@ Overfull \hbox (41.259pt too wide) in paragraph at lines 102--103
  [][] 
  []
 
-[18 <./Images/Projekt_Messe_Class1.png (PNG copy)>]
+[18 <./Images/Projekt_Messe_Class2.png (PNG copy)>]
 Overfull \hbox (17.61298pt too wide) in paragraph at lines 114--115
 \T1/lmr/m/n/12 API und ver-wen-det zu-sätz-lich noch Mi-cro-soft.AspNetCore.Aut
 hentication.JwtBearer
@@ -2118,7 +2118,7 @@ Here is how much of TeX's memory you used:
 b><c:/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2020/
 texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/texlive/2020/texmf-dist/fonts
 /type1/public/lm/lmsy10.pfb>
-Output written on main.pdf (29 pages, 846848 bytes).
+Output written on main.pdf (29 pages, 846467 bytes).
 PDF statistics:
  405 PDF objects out of 1000 (max. 8388607)
  324 compressed objects within 4 object streams
