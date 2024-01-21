@@ -39,11 +39,13 @@
 \contentsline {subsubsection}{\nonumberline User - Interest}{13}{subsubsection*.38}%
 \contentsline {section}{\numberline {4.2}Aufbau und Funktionsweise}{14}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Architektur}{14}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}USE Case- und Klassen-Diagramme}{15}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Prerequisites: Bibliotheken und Komponenten}{15}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Inbetriebnahme vor Ort}{15}{subsection.4.2.4}%
-\contentsline {subsection}{\numberline {4.2.5}Technische Beschreibung der WebCam Anbindung}{15}{subsection.4.2.5}%
-\contentsline {subsection}{\numberline {4.2.6}Anleitung Bedienung durch den Kunden}{15}{subsection.4.2.6}%
-\contentsline {subsection}{\numberline {4.2.7}Anleitung Datenabruf und Übermittlung}{15}{subsection.4.2.7}%
-\contentsline {subsection}{\numberline {4.2.8}Testszenarien}{15}{subsection.4.2.8}%
+\contentsline {subsection}{\numberline {4.2.2}USE Case- und Klassen-Diagramme}{16}{subsection.4.2.2}%
+\contentsline {subsubsection}{\nonumberline Aktionen eines Kunden}{16}{subsubsection*.40}%
+\contentsline {subsubsection}{\nonumberline Aktionen eines Mitarbeiters}{17}{subsubsection*.42}%
+\contentsline {subsection}{\numberline {4.2.3}Prerequisites: Bibliotheken und Komponenten}{19}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Inbetriebnahme vor Ort}{19}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Technische Beschreibung der WebCam Anbindung}{19}{subsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.2.6}Anleitung Bedienung durch den Kunden}{19}{subsection.4.2.6}%
+\contentsline {subsection}{\numberline {4.2.7}Anleitung Datenabruf und Übermittlung}{19}{subsection.4.2.7}%
+\contentsline {subsection}{\numberline {4.2.8}Testszenarien}{19}{subsection.4.2.8}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

@@ -46,6 +46,7 @@ Ein Kunde kann mehrere Interessen haben, aber eine Interesse wie z.B. Reisen kan
 
 \newpage
 \section{Aufbau und Funktionsweise}
+Dieser Abschnitt befasst sich mit dem Aufbau, Architektur und Funktionsweise der Softwarelösung beschrieben mit Hilfe von grafischen Darstellungen mit verschiedenen Diagrammen.
 
 \subsection{Architektur}
 \begin{figure}[h]
@@ -54,16 +55,47 @@ Ein Kunde kann mehrere Interessen haben, aber eine Interesse wie z.B. Reisen kan
 	\caption{Grafische Darstellung der Architektur}
 	\label{fig:projektmessearchitektur}
 \end{figure}
+Der Aufbau der Softwarelösung ist eine klassische Client-Server-Architektur. Abbildung \ref{fig:projektmessearchitektur} gibt einen Überblick über die beiden Komponenten und ihr Zusammenspiel. 
+
+Der Client befindet sich mit den Mitarbeitern am Messe Stand und ist dort auf den Laptops für die Kunden verfügbar. Dabei handelt es sich um die Frontend UI, die zur Eingabe von Kundendaten und zur Übermittlung an die Firmenserver mit grafische Komponenten dient. Sowohl Kunden als auch Mitarbeiter können den Client bedienen, wobei die Übermittlungsfunktion für Daten lediglich mit Angabe von zuvor registrierten Anmeldedaten benutzt werden kann. Im regulären Betrieb für Kunden befindet sich der Client in einer Art Offline Modus und speichert die Kundendaten in einer lokalen Datenbank ab. Erst nach aktiver Übermittlung an den Firmenserver durch einen Mitarbeiter, werden die Daten zur Firmenzentrale gesendet.
+
+Die Backend Anwendung, eine Rest API, läuft auf den Firmenservern in der Zentrale. Diese wird über das Internet vom Client aus angesteuert, wenn neue Daten durch Mitarbeiter übermittelt werden. Im Gegensatz zur lokalen Client Datenbank, die nur die Daten, des Geräts auf dem diese ausgeführt wird, enthält, sammeln sich in der Datenbank auf dem Firmenserver alle angegebenen Kundendaten an. Zusätzlich werden nach erfolgreicher Übermittlung die Daten vom Client entfernt, um Speicherplatz frei zu machen und Duplikate zu verhindern. Die Mitarbeiter und der Zentrale können im Backend via einer Swagger UI im Browser nach Angabe von validen Anmeldedaten die Kundendaten abfragen.
 
 \newpage
 \subsection{USE Case- und Klassen-Diagramme}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\linewidth]{Images/Projekt_Messe_UseCase}
+	\includegraphics[width=\linewidth]{Images/Projekt_Messe_UseCase2}
 	\caption{Use Case Diagramm zur Softwarelösung}
 	\label{fig:projektmesseusecase}
 \end{figure}
+
+In Abbildung \ref{fig:projektmesseusecase} ist ein Anwendungsfalldiagramm zur Softwarelösung zu sehen. Es gibt zwei Akteure den Kunden und den Mitarbeiter, die verteilt über Frontend UI und Backend Anwendung verschiedene Aktionen durchführen können. Dabei erbt der Mitarbeiter alle Funktionen des Kunden, da dieser auch ohne Angabe von Anmeldedaten alle Aktionen eines Kunden durchführen kann.
+
+\subsubsection{Aktionen eines Kunden}
+\begin{itemize}
+	\item Kamera auswählen: Mit eine Dropdown Liste kann in der Oberfläche eine Kamera unter all den angeschlossenen gewählt werden. Eine Kamera wird immer als Default ausgewählt sein.
+	\item Kamera einschalten: Die ausgewählte Kamera wird eingeschalten und deren Übertragung angezeigt.
+	\item Foto machen: Nachdem die Kamera eingeschaltet wurde, kann ein Foto von deren Übertragung gemacht werden.
+	\item Persönliche Daten eingeben: Der Kunde kann verschiedene persönliche Daten, wie Name und Anschrift und diversen Textfeldern angeben.
+	\item Daten lokal einreichen: Wenn alle notwendigen Daten angegeben wurden, können die Angaben eingereicht und damit lokal gespeichert werden.
+	\item Interessen auswählen: Der Kunde kann zwischen verschiedenen vorgegebenen Interessen auswählen und diese per Klick selektieren.
+	\item neue Firma anlegen: Wenn von den vorhandenen Firmen keine zusagt, kann eine neue Firma angelegt werden.
+	\item Firma auswählen: Der Kunde kann aus verschiedenen angegebenen Firmen eine auswählen.
+\end{itemize}
+
+\subsubsection{Aktionen eines Mitarbeiters}
+\begin{itemize}
+	\item Registrieren: Ein Mitarbeiter kann im Backend neue Anmeldedaten registrieren mit denen er sich später dann in Front- und Backend anmelden kann.
+	\item Login Daten eingeben: Der Mitarbeiter kann sowohl im Front- als auch Backend die Anmeldedaten angeben um sich anzumelden.
+	\item Daten übermitteln: Nach Angabe von Anmeldedaten kann ein Mitarbeiter die lokal gespeicherten Daten an die Firmenzentrale übermitteln.
+	\item Alle Kundendaten abfragen: Ein Mitarbeiter kann nach Angabe von Anmeldedaten im Backend alle Kundendaten abfragen.
+	\item Einzelne Kundendaten abfragen: Ein Mitarbeiter kann nach Angabe von Anmeldedaten im Backend einzelne Kundendaten spezifisch abfragen.
+	\item Firmen abfragen: Ein Mitarbeiter kann nach Angabe von Anmeldedaten im Backend die Firmen abfragen.
+	\item Interessen abfragen: Ein Mitarbeiter kann nach Angabe von Anmeldedaten im Backend die Interessen abfragen.
+\end{itemize}
+\newpage
 
 \begin{figure}[h]
 	\centering
