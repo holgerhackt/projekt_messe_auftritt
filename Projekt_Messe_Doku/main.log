@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.12)  20 JAN 2024 19:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.12)  21 JAN 2024 15:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1986,28 +1986,57 @@ Overfull \hbox (49.19995pt too wide) in paragraph at lines 66--71
 
  (./Chapters/03_Schluss.tex
 chapter 4.
-<Images/Projekt_Messe_ERModell2.png, id=173, 1013.7875pt x 652.4375pt>
+<Images/Projekt_Messe_ERModell2.png, id=173, 1013.7875pt x 662.475pt>
 File: Images/Projekt_Messe_ERModell2.png Graphic file (type png)
 <use Images/Projekt_Messe_ERModell2.png>
 Package pdftex.def Info: Images/Projekt_Messe_ERModell2.png  used on input line
  13.
-(pdftex.def)             Requested size: 412.56497pt x 265.51003pt.
+(pdftex.def)             Requested size: 412.56497pt x 269.5948pt.
 [11
 
 
 
 
- <./Images/Projekt_Messe_ERModell2.png (PNG copy)>] [12]) [13]
+ <./Images/Projekt_Messe_ERModell2.png (PNG copy)>] [12] [13]
+<Images/Projekt_Messe_Architektur.png, id=209, 672.5125pt x 451.6875pt>
+File: Images/Projekt_Messe_Architektur.png Graphic file (type png)
+<use Images/Projekt_Messe_Architektur.png>
+Package pdftex.def Info: Images/Projekt_Messe_Architektur.png  used on input li
+ne 53.
+(pdftex.def)             Requested size: 330.05322pt x 221.6803pt.
+ [14 <./Images/Projekt_Messe_Architektur.png (PNG copy)>]
+<Images/Projekt_Messe_UseCase.png, id=217, 923.45pt x 833.1125pt>
+File: Images/Projekt_Messe_UseCase.png Graphic file (type png)
+<use Images/Projekt_Messe_UseCase.png>
+Package pdftex.def Info: Images/Projekt_Messe_UseCase.png  used on input line 6
+3.
+(pdftex.def)             Requested size: 412.56497pt x 372.20216pt.
+<Images/Projekt_Messe_Class1.png, id=218, 1616.0375pt x 1716.4125pt>
+File: Images/Projekt_Messe_Class1.png Graphic file (type png)
+<use Images/Projekt_Messe_Class1.png>
+Package pdftex.def Info: Images/Projekt_Messe_Class1.png  used on input line 70
+.
+(pdftex.def)             Requested size: 453.82397pt x 482.0065pt.
+
+Overfull \hbox (41.259pt too wide) in paragraph at lines 70--71
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [15 <./Images/Projekt_Messe_UseCase.png (PNG copy)>] [16 <./Images/Projekt_Me
+sse_Class1.png (PNG copy)>]
 \openout2 = `Chapters/Zusammenfassung.aux'.
 
-
-(./Chapters/Zusammenfassung.tex [14
-
+ (./Chapters/Zusammenfassung.tex [17
 
 
 
 
-]) 
+
+])
+
 AED: lastpage setting LastPage
 (./main.aux (./TemplateElements/TitelPage_de.aux) (./Chapters/01_Einleitung.aux
 ) (./Chapters/02_Hauptteil.aux) (./Chapters/03_Schluss.aux)
@@ -2016,10 +2045,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 56289 strings out of 479383
- 1391016 string characters out of 5873325
+ 56322 strings out of 479383
+ 1391960 string characters out of 5873325
  2206423 words of memory out of 5000000
- 72342 multiletter control sequences out of 15000+600000
+ 72366 multiletter control sequences out of 15000+600000
  466322 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  106i,11n,111p,10670b,681s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2029,10 +2058,10 @@ Here is how much of TeX's memory you used:
 b><c:/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2020/
 texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/texlive/2020/texmf-dist/fonts
 /type1/public/lm/lmsy10.pfb>
-Output written on main.pdf (18 pages, 427471 bytes).
+Output written on main.pdf (21 pages, 714815 bytes).
 PDF statistics:
- 295 PDF objects out of 1000 (max. 8388607)
- 243 compressed objects within 3 object streams
- 91 named destinations out of 1000 (max. 500000)
- 221 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 318 PDF objects out of 1000 (max. 8388607)
+ 260 compressed objects within 3 object streams
+ 97 named destinations out of 1000 (max. 500000)
+ 236 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -19,7 +19,7 @@ Betrachten wir zunächst ein ER-Modell der Datenbank um einen Überblick zu erha
 In diesem Abschnitt betrachten wir die Entitäten des ER-Modells und ihre Attribute genauer.
 
 \subsubsection{User}
-Die Entität User repräsentiert den Kunden, der seine Daten auf der Messe angegeben hat. Diese Person hat einen Name, Email, Bild, Adresse und eventuell eine Firmenzugehörigkeit. Der Primärschlüssel ist Id, wohingegen AdressId und CompanyId Fremdschlüssel sind.
+Die Entität User repräsentiert den Kunden, der seine Daten auf der Messe angegeben hat. Diese Person hat einen Vor- und Nachnamen, Email, Bild, Adresse und eventuell eine Firmenzugehörigkeit. Der Primärschlüssel ist Id, wohingegen AdressId und CompanyId Fremdschlüssel sind.
 
 \subsubsection{Company}
 Diese Entität repräsentiert eine Firma, der ein Kunde möglicherweise angehören kann. Sie hat eine Id als Primärschlüssel, einen Namen und eine Adresse mit AddressId als Fremdschlüssel.
@@ -44,9 +44,34 @@ Ein Kunde kann Mitarbeiter einer Firma sein, muss es aber nicht und eine Firma k
 \subsubsection{User - Interest}
 Ein Kunde kann mehrere Interessen haben, aber eine Interesse wie z.B. Reisen kann von vielen Kunden favorisiert werden. Diese n:m Relation wird durch zwei Listen gelöst, wovon sich jeweils eine in der Entität User und Interest befindet.
 
+\newpage
 \section{Aufbau und Funktionsweise}
+
 \subsection{Architektur}
-\subsection{USE Case und UML Diagramme}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{Images/Projekt_Messe_Architektur}
+	\caption{Grafische Darstellung der Architektur}
+	\label{fig:projektmessearchitektur}
+\end{figure}
+
+\newpage
+\subsection{USE Case- und Klassen-Diagramme}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{Images/Projekt_Messe_UseCase}
+	\caption{Use Case Diagramm zur Softwarelösung}
+	\label{fig:projektmesseusecase}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.1\linewidth]{Images/Projekt_Messe_Class1}
+	\caption{Klassen-Diagramm zur Softwarelösung}
+	\label{fig:projektmesseclass}
+\end{figure}
+
 \subsection{Prerequisites: Bibliotheken und Komponenten}
 \subsection{Inbetriebnahme vor Ort}
 \subsection{Technische Beschreibung der WebCam Anbindung}
