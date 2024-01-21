@@ -69,9 +69,6 @@ internal partial class LoginForm : Form
 
         ApiClient = new ApiClient(httpClient);
         
-        //Just for testing
-        /*var users = await ApiClient.GetUsersAsync();
-        MessageBox.Show(users.Count() + " user are currently in the database");*/
         try
         {
             await SynchronizeDatabases();

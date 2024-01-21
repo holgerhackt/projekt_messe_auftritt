@@ -104,7 +104,6 @@ public class UsersController : ControllerBase
 					
 			_context.Company.Add(newCompany);
 			_context.SaveChanges();
-            //foundCompany = _context.Company.FirstOrDefault(company => company.Id == newCompany.Id);
             databaseUser.Company = newCompany;
 		}
 	}
@@ -120,6 +119,16 @@ public class UsersController : ControllerBase
 		_context.Users.Remove(image);
 		await _context.SaveChangesAsync();
 
-		return Ok();
+		return NoContent();
 	}
+	
+	//Development only
+	// DELETE: api/Users/
+	/*[HttpDelete]
+	public async Task<IActionResult> DeleteAllUsers()
+	{
+		_context.Users.RemoveRange(_context.Users.ToList());
+		await _context.SaveChangesAsync();
+		return Ok();
+	}*/
 }
