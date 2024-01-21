@@ -145,9 +145,9 @@ internal partial class CameraForm : Form
                 {
                     Country = CountryTextbox.Text,
                     City = CityTextBox.Text,
-                    PostalCode = int.Parse(PostalcodeTextBox.Text),
+                    PostalCode = string.IsNullOrWhiteSpace(PostalcodeTextBox.Text) ? (int?)null : int.Parse(PostalcodeTextBox.Text),
                     Street = textBoxStreet.Text,
-                    HouseNumber = int.Parse(HousenumberTextBox.Text)
+                    HouseNumber = string.IsNullOrWhiteSpace(HousenumberTextBox.Text) ? (int?)null : int.Parse(HousenumberTextBox.Text),
                 };
             }
             _context!.Users.Add(user);
