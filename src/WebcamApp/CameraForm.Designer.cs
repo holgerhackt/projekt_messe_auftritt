@@ -35,7 +35,7 @@
             StartCameraButton = new System.Windows.Forms.Button();
             PhotoButton = new System.Windows.Forms.Button();
             NameLabel = new System.Windows.Forms.Label();
-            textBoxName = new System.Windows.Forms.TextBox();
+            ForenameTextBox = new System.Windows.Forms.TextBox();
             CountryLabel = new System.Windows.Forms.Label();
             textBoxCountry = new System.Windows.Forms.TextBox();
             CityLabel = new System.Windows.Forms.Label();
@@ -67,10 +67,13 @@
             panel1 = new System.Windows.Forms.Panel();
             CamAreaHeaderLbl = new System.Windows.Forms.Label();
             panel2 = new System.Windows.Forms.Panel();
+            ReturnToCompanies = new System.Windows.Forms.Button();
             label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            LastnameTextBox = new System.Windows.Forms.TextBox();
+            label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             NewCompanyPnl.SuspendLayout();
             panel1.SuspendLayout();
@@ -167,22 +170,22 @@
             NameLabel.Location = new System.Drawing.Point(10, 38);
             NameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             NameLabel.Name = "NameLabel";
-            NameLabel.Size = new System.Drawing.Size(39, 14);
+            NameLabel.Size = new System.Drawing.Size(62, 14);
             NameLabel.TabIndex = 6;
-            NameLabel.Text = "Name";
+            NameLabel.Text = "Forename";
             // 
-            // textBoxName
+            // ForenameTextBox
             // 
-            textBoxName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            textBoxName.BackColor = System.Drawing.Color.FromArgb(80, 80, 80);
-            textBoxName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            textBoxName.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            textBoxName.ForeColor = System.Drawing.Color.White;
-            textBoxName.Location = new System.Drawing.Point(12, 55);
-            textBoxName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            textBoxName.Name = "textBoxName";
-            textBoxName.Size = new System.Drawing.Size(640, 22);
-            textBoxName.TabIndex = 7;
+            ForenameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            ForenameTextBox.BackColor = System.Drawing.Color.FromArgb(80, 80, 80);
+            ForenameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            ForenameTextBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ForenameTextBox.ForeColor = System.Drawing.Color.White;
+            ForenameTextBox.Location = new System.Drawing.Point(12, 55);
+            ForenameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ForenameTextBox.Name = "ForenameTextBox";
+            ForenameTextBox.Size = new System.Drawing.Size(300, 22);
+            ForenameTextBox.TabIndex = 7;
             // 
             // CountryLabel
             // 
@@ -545,11 +548,14 @@
             // 
             panel2.BackColor = System.Drawing.Color.FromArgb(45, 45, 45);
             panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel2.Controls.Add(label4);
+            panel2.Controls.Add(LastnameTextBox);
+            panel2.Controls.Add(ReturnToCompanies);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(NameLabel);
-            panel2.Controls.Add(textBoxName);
+            panel2.Controls.Add(ForenameTextBox);
             panel2.Controls.Add(NewCompanyBtn);
             panel2.Controls.Add(NewCompanyPnl);
             panel2.Controls.Add(CountryLabel);
@@ -568,6 +574,22 @@
             panel2.Name = "panel2";
             panel2.Size = new System.Drawing.Size(668, 621);
             panel2.TabIndex = 24;
+            // 
+            // ReturnToCompanies
+            // 
+            ReturnToCompanies.BackColor = System.Drawing.Color.FromArgb(61, 61, 61);
+            ReturnToCompanies.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(90, 90, 90);
+            ReturnToCompanies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            ReturnToCompanies.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ReturnToCompanies.ForeColor = System.Drawing.Color.White;
+            ReturnToCompanies.Location = new System.Drawing.Point(539, 271);
+            ReturnToCompanies.Name = "ReturnToCompanies";
+            ReturnToCompanies.Size = new System.Drawing.Size(110, 23);
+            ReturnToCompanies.TabIndex = 26;
+            ReturnToCompanies.Text = "Return";
+            ReturnToCompanies.UseVisualStyleBackColor = false;
+            ReturnToCompanies.Visible = false;
+            ReturnToCompanies.Click += ReturnToCompanies_Click;
             // 
             // label3
             // 
@@ -611,6 +633,32 @@
             panel3.Size = new System.Drawing.Size(668, 100);
             panel3.TabIndex = 25;
             // 
+            // LastnameTextBox
+            // 
+            LastnameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            LastnameTextBox.BackColor = System.Drawing.Color.FromArgb(80, 80, 80);
+            LastnameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            LastnameTextBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LastnameTextBox.ForeColor = System.Drawing.Color.White;
+            LastnameTextBox.Location = new System.Drawing.Point(342, 55);
+            LastnameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            LastnameTextBox.Name = "LastnameTextBox";
+            LastnameTextBox.Size = new System.Drawing.Size(300, 22);
+            LastnameTextBox.TabIndex = 27;
+            // 
+            // label4
+            // 
+            label4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label4.ForeColor = System.Drawing.Color.White;
+            label4.Location = new System.Drawing.Point(342, 38);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(60, 14);
+            label4.TabIndex = 28;
+            label4.Text = "Lastname";
+            // 
             // CameraForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -646,7 +694,7 @@
         private System.Windows.Forms.Button StartCameraButton;
         private System.Windows.Forms.Button PhotoButton;
         private System.Windows.Forms.Label NameLabel;
-        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.TextBox ForenameTextBox;
         private System.Windows.Forms.Label CountryLabel;
         private System.Windows.Forms.TextBox textBoxCountry;
         private System.Windows.Forms.Label CityLabel;
@@ -682,6 +730,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button ReturnToCompanies;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox LastnameTextBox;
     }
 }
 

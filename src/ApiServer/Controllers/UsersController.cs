@@ -77,8 +77,10 @@ public class UsersController : ControllerBase
 			}
 		}
 	}
-	private void FindAndAddCompany(Company companyToAdd, User databaseUser)
+	private void FindAndAddCompany(CompanyDto companyToAdd, User databaseUser)
 	{
+		//Check if company already exists in db by name, because the name values are saved locally and if user
+		//add new companies the ids will be different
 		Company foundCompany = _context.Company.FirstOrDefault(company => company.Id == companyToAdd.Id);
 
 		if (foundCompany != null)
@@ -88,7 +90,7 @@ public class UsersController : ControllerBase
 		else
 		{
 			//Adding the company to db that was created on client side
-			_context.Company.Add(new Company
+			Company newCompany = new Company
 			{
 				Name = companyToAdd.Name,
 				Address = new Address { 
@@ -98,9 +100,12 @@ public class UsersController : ControllerBase
 					HouseNumber	= companyToAdd.Address.HouseNumber,
 					Street = companyToAdd.Address.Street,
 				}
-			});
-            foundCompany = _context.Company.FirstOrDefault(company => company.Id == companyToAdd.Id);
-            databaseUser.Company = foundCompany;
+			};		
+					
+			_context.Company.Add(newCompany);
+			_context.SaveChanges();
+            //foundCompany = _context.Company.FirstOrDefault(company => company.Id == newCompany.Id);
+            databaseUser.Company = newCompany;
 		}
 	}
 

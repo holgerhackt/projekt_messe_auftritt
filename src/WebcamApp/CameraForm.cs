@@ -32,7 +32,8 @@ internal partial class CameraForm : Form
     private readonly OfflineContext _context;
     private readonly IMapper _mapper = AutoMapperConfiguration.Configure();
     private byte[] _image;
-
+    // TODO: Es dürfen keine leeren User gespeichert werden
+    // TODO: Es dürfen keine leeren Companies gespeichert werden
 
     public CameraForm()
     {
@@ -138,7 +139,8 @@ internal partial class CameraForm : Form
         {
             User user = new User()
             {
-                Name = textBoxName.Text,
+                Forename = ForenameTextBox.Text,
+                Lastname = LastnameTextBox.Text,
                 Image = _image,
                 Address = new Address()
                 {
@@ -154,7 +156,7 @@ internal partial class CameraForm : Form
             var dbUser = _context.Add(user);
             await _context.SaveChangesAsync();
 
-            string text = string.Format(Resources.UserCreationSuccessText, user.Name);
+            string text = string.Format(Resources.UserCreationSuccessText, user.Forename, user.Lastname);
             MessageBox.Show(text, Resources.UserCreationSuccessCaption);
             ClearInputFields();
         }
@@ -184,6 +186,15 @@ internal partial class CameraForm : Form
     {
         NewCompanyPnl.Visible = true;
         NewCompanyBtn.Visible = false;
+        ReturnToCompanies.Visible = true;
+    }
+
+    private void ResetCompanyPanel()
+    {
+        NewCompanyPnl.Controls.OfType<TextBox>().ToList().ForEach(textBox => textBox.Clear());
+        NewCompanyPnl.Visible = false;
+        ReturnToCompanies.Visible = false;
+        NewCompanyBtn.Visible = true;
     }
 
     private void AddNewCompanyBtn_Click(object sender, EventArgs e)
@@ -193,15 +204,7 @@ internal partial class CameraForm : Form
         {
             if (item is Company cmp && cmp.Name == CompanyNameTxtBox.Text)
             {
-                CompanyNameTxtBox.ResetText();
-                CompanyCountryTxtBox.ResetText();
-                CompanyCityTxtBox.ResetText();
-                CompanyPostalTxtBox.ResetText();
-                CompanyStreetTxtBox.ResetText();
-                CompanyHouseNrTxtBox.ResetText();
-
-                NewCompanyPnl.Visible = false;
-                NewCompanyBtn.Visible = true;
+                ResetCompanyPanel();
                 return;
             }
         }
@@ -234,14 +237,11 @@ internal partial class CameraForm : Form
             if (companyCheckedListBox.Items[i] is Company cmp && cmp.Name == company.Name) companyCheckedListBox.SetItemChecked(i, true);
         }
 
-        CompanyNameTxtBox.ResetText();
-        CompanyCountryTxtBox.ResetText();
-        CompanyCityTxtBox.ResetText();
-        CompanyPostalTxtBox.ResetText();
-        CompanyStreetTxtBox.ResetText();
-        CompanyHouseNrTxtBox.ResetText();
+        ResetCompanyPanel();
+    }
 
-        NewCompanyPnl.Visible = false;
-        NewCompanyBtn.Visible = true;
+    private void ReturnToCompanies_Click(object sender, EventArgs e)
+    {
+        ResetCompanyPanel();
     }
 }

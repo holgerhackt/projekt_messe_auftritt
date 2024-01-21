@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiServer;
+using AutoMapper;
 using Models;
+using Models.DTOs;
 
 namespace ApiServer.Controllers
 {
@@ -15,10 +17,12 @@ namespace ApiServer.Controllers
     public class CompanyController : ControllerBase
     {
         private readonly ImageContext _context;
+        private readonly IMapper _mapper;
 
-        public CompanyController(ImageContext context)
+        public CompanyController(ImageContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Company
@@ -26,6 +30,17 @@ namespace ApiServer.Controllers
         public async Task<ActionResult<IEnumerable<Company>>> GetCompany()
         {
             return await _context.Company.Include(u => u.Address).ToListAsync();
+        }
+        
+        
+        // GET: api/Company/Dtos
+        // Used for the local database
+        [HttpGet("/api/CompanyDtos")]
+        public async Task<ActionResult<List<CompanyDto>>> GetCompanyDtos()
+        {
+            List<Company> companies = await _context.Company.Include(u => u.Address).ToListAsync();
+            List<CompanyDto> companyDtos = _mapper.Map<List<CompanyDto>>(companies);
+            return companyDtos;
         }
 
         // GET: api/Company/5

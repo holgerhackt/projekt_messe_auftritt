@@ -90,12 +90,12 @@ internal partial class LoginForm : Form
     
     private async Task LoadDataToLocalDb()
     {
-        var _interests = await ApiClient.GetInterestsAsync();
-        await _context.Interests.AddRangeAsync(_interests);
+        var interests = await ApiClient.GetInterestsAsync();
+        await _context.Interests.AddRangeAsync(interests);
         
-        var _companies = await ApiClient.GetCompaniesAsync();
-        await _context.Company.AddRangeAsync(_companies);
-        
+        IEnumerable<CompanyDto> companyDtos = await ApiClient.GetCompanyDtosAsync();
+        IEnumerable<Company> companies = _mapper.Map<IEnumerable<Company>>(companyDtos);
+        await _context.Company.AddRangeAsync(companies);
         await _context.SaveChangesAsync();
     }
 
@@ -103,28 +103,38 @@ internal partial class LoginForm : Form
     {
         await _context.Database.EnsureDeletedAsync();
         await _context.Database.EnsureCreatedAsync();
+        _context.ChangeTracker.Clear(); 
+        //very very important, even after deleting the database, the context still tracks the entities
     }
 
     private async Task SynchronizeDatabases()
     {
-        //TODO: Add Exception handling e.g. if the request fails --> concept has to be made!
         if (_context.Users.Any())
         {
             List<User> users = await _context.Users
-                .AsNoTracking()  // very important to avoid tracking errors especially with the interests
                 .Include(u => u.Address)
                 .Include(u => u.Company)
                     .ThenInclude(ca => ca!.Address)
                 .Include(u => u.Interests)
                 .ToListAsync();
-            List<Task> tasks = new List<Task>();
             
             foreach (User user in users)
             {
                 UserDto userDto = _mapper.Map<UserDto>(user);
-                tasks.Add(ApiClient.PostUserAsync(userDto));
+                try
+                {
+                    User addedUser = await ApiClient.PostUserAsync(userDto);
+                    //synchronize programming to avoid adding the same company multiple times and to ensure that if
+                    //an exception occurs, the posted user will be deleted
+                    _context.Users.Remove(user);
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error while synchronizing the database!\n" + e.Message);
+                    throw;
+                }
             }
-            await Task.WhenAll(tasks);
         }
     }
     

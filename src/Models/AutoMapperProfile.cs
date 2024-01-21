@@ -16,6 +16,9 @@ public class AutoMapperProfile: Profile
         
         CreateMap<Address, AddressDto>();
         CreateMap<AddressDto, Address>();
+
+        CreateMap<Company, CompanyDto>();
+        CreateMap<CompanyDto, Company>();
     }
 }
 
