@@ -1,23 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using AForge.Video;
 using AForge.Video.DirectShow;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Models;
-using Models.DTOs;
 using WebcamApp.OfflineDB;
 using WebcamApp.Properties;
 
@@ -135,6 +124,12 @@ internal partial class CameraForm : Form
 
     private async void Submit_Click(object sender, EventArgs e)
     {
+        if(ForenameTextBox.Text=="" || LastnameTextBox.Text=="" || textBoxCountry.Text=="" || textBoxCity.Text==""
+            || textBoxPostcode.Text=="" || textBoxStreet.Text=="" || textBoxHousenumber.Text == "")
+        {
+            MessageBox.Show("Some data is missing. Please fill out the missing fields, then submit again.", "Error: Some fields are empty");
+            return;
+        }
         try
         {
             User user = new User()
