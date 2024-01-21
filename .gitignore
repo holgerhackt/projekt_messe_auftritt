@@ -6,3 +6,4 @@ obj/
 .vscode/
 packages/
 .idea/
+*/sqlite.db*
