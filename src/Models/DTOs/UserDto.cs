@@ -7,8 +7,8 @@ public class UserDto
     public string Lastname { get; set; }
     public string? Email { get; set; }
     public byte[]? Image { get; set; }
-    public int? AddressId { get; set; } 
-    public AddressDto? Address { get; set; }  
+    public int? AddressId { get; set; }
+    public AddressDto? Address { get; set; }
 
     public int? CompanyId { get; set; }
     public CompanyDto? Company { get; set; }

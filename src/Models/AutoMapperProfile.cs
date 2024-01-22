@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Models.DTOs;
+
 namespace Models;
 
-
-public class AutoMapperProfile: Profile
+public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
@@ -13,7 +13,7 @@ public class AutoMapperProfile: Profile
             .ForMember(dst => dst.Interests, opt => opt.MapFrom(src => src.Interests.Select(i => i.Id)));
         CreateMap<UserDto, User>()
             .ForMember(dst => dst.Interests, opt => opt.Ignore()); //Because of manual mapping
-        
+
         CreateMap<Address, AddressDto>();
         CreateMap<AddressDto, Address>();
 
@@ -26,12 +26,8 @@ public class AutoMapperConfiguration
 {
     public static IMapper Configure()
     {
-        var mapperConfiguration = new MapperConfiguration(cfg =>
-        {
-            cfg.AddProfile<AutoMapperProfile>();
-        });
+        var mapperConfiguration = new MapperConfiguration(cfg => { cfg.AddProfile<AutoMapperProfile>(); });
 
         return mapperConfiguration.CreateMapper();
     }
 }
-

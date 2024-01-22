@@ -1,12 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Models;
 
 namespace WebcamApp.OfflineDB;
 
-public class OfflineContext: DbContext
+public class OfflineContext : DbContext
 {
-
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Address> Addresses { get; set; } = null!;
     public DbSet<Interest> Interests { get; set; } = null!;
