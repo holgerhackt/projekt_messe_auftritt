@@ -60,8 +60,15 @@ internal partial class CameraForm : Form
         foreach (var index in checkedIndices) companyCheckedListBox.SetItemChecked(index, false);
         checkedIndices = interestsCheckedListBox.CheckedIndices.Cast<int>().ToList();
         foreach (var index in checkedIndices) interestsCheckedListBox.SetItemChecked(index, false);
-        if (_videoCaptureDevice?.IsRunning == true) _videoCaptureDevice.SignalToStop();
-        pictureBox1.Image = null;
+        if (_videoCaptureDevice?.IsRunning == true)
+        {
+            _videoCaptureDevice.NewFrame -= VideoCaptureDevice_NewFrame;
+            _videoCaptureDevice.SignalToStop();
+        }
+
+        _videoCaptureDevice = new VideoCaptureDevice(_filterInfoCollection[cboCamera.SelectedIndex].MonikerString);
+        _videoCaptureDevice.NewFrame += VideoCaptureDevice_NewFrame;
+        _videoCaptureDevice.Start();
     }
 
     private Address CreateAddress(Panel panel, HashSet<string> excludedTextBoxNames)
@@ -109,6 +116,7 @@ internal partial class CameraForm : Form
                 MessageBox.Show("Please enter a valid postal code!");
                 return;
             }
+
             var errorMessage = Validator!.ValidateTextBoxContent(NewUserPanel, CountryTextbox.Name,
                 HousenumberTextBox.Name, EmailTextBox.Name, CityTextBox.Name);
             if (errorMessage != null)
@@ -211,38 +219,11 @@ internal partial class CameraForm : Form
         _image = ImageToByteArray(pictureBox1.Image);
     }
 
+    #endregion
 
 
     #region Company
 
-
-    private void ClearInputFields()
-    {
-        panel2.Controls.OfType<TextBox>().ToList().ForEach(textBox => textBox.Clear());
-        var checkedIndices = companyCheckedListBox.CheckedIndices.Cast<int>().ToList();
-        foreach (var index in checkedIndices)
-        {
-            companyCheckedListBox.SetItemChecked(index, false);
-        }
-        checkedIndices = interestsCheckedListBox.CheckedIndices.Cast<int>().ToList();
-        foreach (var index in checkedIndices)
-        {
-            interestsCheckedListBox.SetItemChecked(index, false);
-        }
-        //if (_videoCaptureDevice?.IsRunning == true) _videoCaptureDevice.SignalToStop();
-        //pictureBox1.Image = null;
-        // With that the cam starts running again, when a picture was taken after submitting, since we want the next
-        //customer to take their photo, without needing to start the cam again.
-        if (_videoCaptureDevice?.IsRunning == true)
-        {
-            _videoCaptureDevice.NewFrame -= VideoCaptureDevice_NewFrame;
-            _videoCaptureDevice.SignalToStop();
-        }
-
-        _videoCaptureDevice = new VideoCaptureDevice(_filterInfoCollection[cboCamera.SelectedIndex].MonikerString);
-        _videoCaptureDevice.NewFrame += VideoCaptureDevice_NewFrame;
-        _videoCaptureDevice.Start();
-    }
     private void NewCompanyBtn_Click(object sender, EventArgs e)
     {
         NewCompanyPnl.Visible = true;
@@ -273,11 +254,13 @@ internal partial class CameraForm : Form
             MessageBox.Show("Please enter a company name!");
             return;
         }
+
         if (!string.IsNullOrWhiteSpace(CompanyPostalTxtBox.Text) && !int.TryParse(CompanyPostalTxtBox.Text, out _))
         {
             MessageBox.Show("Please enter a valid postal code!");
             return;
         }
+
         var errorMessage = Validator!.ValidateTextBoxContent(NewCompanyPnl, CompanyCountryTxtBox.Name,
             CompanyHouseNrTxtBox.Name, null, CompanyCityTxtBox.Name);
         if (errorMessage != null)
@@ -285,6 +268,7 @@ internal partial class CameraForm : Form
             MessageBox.Show(errorMessage, "Validation Error");
             return;
         }
+
         var company = new Company
         {
             Name = CompanyNameTxtBox.Text

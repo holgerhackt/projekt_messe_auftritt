@@ -7,5 +7,5 @@ public class Address
     public string? City { get; set; }
     public int? PostalCode { get; set; }
     public string? Street { get; set; }
-    public string? HouseNumber { get; set; }  //string because housenumbers can contain letters e.g. 12a
+    public string? HouseNumber { get; set; } //string because housenumbers can contain letters e.g. 12a
 }

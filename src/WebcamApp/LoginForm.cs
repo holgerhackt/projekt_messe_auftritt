@@ -110,7 +110,7 @@ internal partial class LoginForm : Form
                 .ThenInclude(ca => ca!.Address)
                 .Include(u => u.Interests)
                 .ToListAsync();
-            
+
             foreach (var user in users)
             {
                 var userDto = _mapper.Map<UserDto>(user);
