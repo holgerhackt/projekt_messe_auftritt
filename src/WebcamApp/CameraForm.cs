@@ -211,10 +211,38 @@ internal partial class CameraForm : Form
         _image = ImageToByteArray(pictureBox1.Image);
     }
 
-    #endregion
+
 
     #region Company
 
+
+    private void ClearInputFields()
+    {
+        panel2.Controls.OfType<TextBox>().ToList().ForEach(textBox => textBox.Clear());
+        var checkedIndices = companyCheckedListBox.CheckedIndices.Cast<int>().ToList();
+        foreach (var index in checkedIndices)
+        {
+            companyCheckedListBox.SetItemChecked(index, false);
+        }
+        checkedIndices = interestsCheckedListBox.CheckedIndices.Cast<int>().ToList();
+        foreach (var index in checkedIndices)
+        {
+            interestsCheckedListBox.SetItemChecked(index, false);
+        }
+        //if (_videoCaptureDevice?.IsRunning == true) _videoCaptureDevice.SignalToStop();
+        //pictureBox1.Image = null;
+        // With that the cam starts running again, when a picture was taken after submitting, since we want the next
+        //customer to take their photo, without needing to start the cam again.
+        if (_videoCaptureDevice?.IsRunning == true)
+        {
+            _videoCaptureDevice.NewFrame -= VideoCaptureDevice_NewFrame;
+            _videoCaptureDevice.SignalToStop();
+        }
+
+        _videoCaptureDevice = new VideoCaptureDevice(_filterInfoCollection[cboCamera.SelectedIndex].MonikerString);
+        _videoCaptureDevice.NewFrame += VideoCaptureDevice_NewFrame;
+        _videoCaptureDevice.Start();
+    }
     private void NewCompanyBtn_Click(object sender, EventArgs e)
     {
         NewCompanyPnl.Visible = true;

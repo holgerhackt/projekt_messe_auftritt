@@ -37,13 +37,17 @@
 \contentsline {subsubsection}{\nonumberline User - Address}{12}{subsubsection*.34}%
 \contentsline {subsubsection}{\nonumberline User - Company}{13}{subsubsection*.36}%
 \contentsline {subsubsection}{\nonumberline User - Interest}{13}{subsubsection*.38}%
-\contentsline {section}{\numberline {4.2}Aufbau und Funktionsweise}{13}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Architektur}{13}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}USE Case und UML Diagramme}{13}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Prerequisites: Bibliotheken und Komponenten}{13}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Inbetriebnahme vor Ort}{13}{subsection.4.2.4}%
-\contentsline {subsection}{\numberline {4.2.5}Technische Beschreibung der WebCam Anbindung}{13}{subsection.4.2.5}%
-\contentsline {subsection}{\numberline {4.2.6}Anleitung Bedienung durch den Kunden}{13}{subsection.4.2.6}%
-\contentsline {subsection}{\numberline {4.2.7}Anleitung Datenabruf und Übermittlung}{13}{subsection.4.2.7}%
-\contentsline {subsection}{\numberline {4.2.8}Testszenarien}{13}{subsection.4.2.8}%
+\contentsline {section}{\numberline {4.2}Aufbau und Funktionsweise}{14}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Architektur}{14}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}USE Case- und Klassen-Diagramme}{16}{subsection.4.2.2}%
+\contentsline {subsubsection}{\nonumberline Aktionen eines Kunden}{16}{subsubsection*.40}%
+\contentsline {subsubsection}{\nonumberline Aktionen eines Mitarbeiters}{17}{subsubsection*.42}%
+\contentsline {subsection}{\numberline {4.2.3}Prerequisites: Bibliotheken und Komponenten}{19}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Inbetriebnahme vor Ort}{20}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Technische Beschreibung der WebCam Anbindung}{21}{subsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.2.6}Anleitung Bedienung durch den Kunden}{22}{subsection.4.2.6}%
+\contentsline {subsection}{\numberline {4.2.7}Anleitung Datenabruf und Übermittlung}{22}{subsection.4.2.7}%
+\contentsline {subsubsection}{\nonumberline Übermittlung}{22}{subsubsection*.44}%
+\contentsline {subsubsection}{\nonumberline Datenabruf}{22}{subsubsection*.46}%
+\contentsline {subsection}{\numberline {4.2.8}Testszenarien}{24}{subsection.4.2.8}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

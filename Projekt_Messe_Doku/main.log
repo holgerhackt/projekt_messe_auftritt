@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.12)  20 JAN 2024 19:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.12)  21 JAN 2024 22:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1986,22 +1986,111 @@ Overfull \hbox (49.19995pt too wide) in paragraph at lines 66--71
 
  (./Chapters/03_Schluss.tex
 chapter 4.
-<Images/Projekt_Messe_ERModell2.png, id=173, 1013.7875pt x 652.4375pt>
+<Images/Projekt_Messe_ERModell2.png, id=173, 1013.7875pt x 662.475pt>
 File: Images/Projekt_Messe_ERModell2.png Graphic file (type png)
 <use Images/Projekt_Messe_ERModell2.png>
 Package pdftex.def Info: Images/Projekt_Messe_ERModell2.png  used on input line
  13.
-(pdftex.def)             Requested size: 412.56497pt x 265.51003pt.
+(pdftex.def)             Requested size: 412.56497pt x 269.5948pt.
 [11
 
 
 
 
- <./Images/Projekt_Messe_ERModell2.png (PNG copy)>] [12]) [13]
+ <./Images/Projekt_Messe_ERModell2.png (PNG copy)>] [12] [13]
+<Images/Projekt_Messe_Architektur.png, id=209, 672.5125pt x 451.6875pt>
+File: Images/Projekt_Messe_Architektur.png Graphic file (type png)
+<use Images/Projekt_Messe_Architektur.png>
+Package pdftex.def Info: Images/Projekt_Messe_Architektur.png  used on input li
+ne 54.
+(pdftex.def)             Requested size: 330.05322pt x 221.6803pt.
+ [14 <./Images/Projekt_Messe_Architektur.png (PNG copy)>] [15]
+<Images/Projekt_Messe_UseCase2.png, id=224, 923.45pt x 833.1125pt>
+File: Images/Projekt_Messe_UseCase2.png Graphic file (type png)
+<use Images/Projekt_Messe_UseCase2.png>
+Package pdftex.def Info: Images/Projekt_Messe_UseCase2.png  used on input line 
+69.
+(pdftex.def)             Requested size: 412.56497pt x 372.20216pt.
+ [16 <./Images/Projekt_Messe_UseCase2.png (PNG copy)>] [17]
+<Images/Projekt_Messe_Class2.png, id=242, 1616.0375pt x 1716.4125pt>
+File: Images/Projekt_Messe_Class2.png Graphic file (type png)
+<use Images/Projekt_Messe_Class2.png>
+Package pdftex.def Info: Images/Projekt_Messe_Class2.png  used on input line 10
+2.
+(pdftex.def)             Requested size: 453.82397pt x 482.0065pt.
+
+Overfull \hbox (41.259pt too wide) in paragraph at lines 102--103
+ [][] 
+ []
+
+[18 <./Images/Projekt_Messe_Class2.png (PNG copy)>]
+Overfull \hbox (17.61298pt too wide) in paragraph at lines 114--115
+\T1/lmr/m/n/12 API und ver-wen-det zu-sätz-lich noch Mi-cro-soft.AspNetCore.Aut
+hentication.JwtBearer
+ []
+
+[19]
+<Images/LoginScreen.png, id=257, 392.21532pt x 188.20313pt>
+File: Images/LoginScreen.png Graphic file (type png)
+<use Images/LoginScreen.png>
+Package pdftex.def Info: Images/LoginScreen.png  used on input line 122.
+(pdftex.def)             Requested size: 288.79422pt x 138.58464pt.
+<Images/Hauptbildschirm.png, id=259, 1163.84813pt x 602.25pt>
+File: Images/Hauptbildschirm.png Graphic file (type png)
+<use Images/Hauptbildschirm.png>
+Package pdftex.def Info: Images/Hauptbildschirm.png  used on input line 131.
+(pdftex.def)             Requested size: 371.30595pt x 192.1358pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[20 <./Images/LoginScreen.png>]
+<Images/Projekt_Messe_Webcam1.png, id=270, 545.03625pt x 30.1125pt>
+File: Images/Projekt_Messe_Webcam1.png Graphic file (type png)
+<use Images/Projekt_Messe_Webcam1.png>
+Package pdftex.def Info: Images/Projekt_Messe_Webcam1.png  used on input line 1
+44.
+(pdftex.def)             Requested size: 371.30595pt x 20.51389pt.
+<Images/Projekt_Messe_Webcam2.png, id=272, 644.4075pt x 220.57407pt>
+File: Images/Projekt_Messe_Webcam2.png Graphic file (type png)
+<use Images/Projekt_Messe_Webcam2.png>
+Package pdftex.def Info: Images/Projekt_Messe_Webcam2.png  used on input line 1
+53.
+(pdftex.def)             Requested size: 371.30595pt x 127.09834pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[21 <./Images/Hauptbildschirm.png> <./Images/Projekt_Messe_Webcam1.png>]
+[22 <./Images/Projekt_Messe_Webcam2.png>]
+<Images/Projekt_Messe_Swagger1.png, id=300, 1178.15157pt x 511.9125pt>
+File: Images/Projekt_Messe_Swagger1.png Graphic file (type png)
+<use Images/Projekt_Messe_Swagger1.png>
+Package pdftex.def Info: Images/Projekt_Messe_Swagger1.png  used on input line 
+171.
+(pdftex.def)             Requested size: 371.30595pt x 161.3314pt.
+<Images/Projekt_Messe_Swagger2.png, id=302, 539.76656pt x 275.52937pt>
+File: Images/Projekt_Messe_Swagger2.png Graphic file (type png)
+<use Images/Projekt_Messe_Swagger2.png>
+Package pdftex.def Info: Images/Projekt_Messe_Swagger2.png  used on input line 
+180.
+(pdftex.def)             Requested size: 288.79422pt x 147.42146pt.
+<Images/Projekt_Messe_Swagger3.png, id=304, 1190.19656pt x 275.52937pt>
+File: Images/Projekt_Messe_Swagger3.png Graphic file (type png)
+<use Images/Projekt_Messe_Swagger3.png>
+Package pdftex.def Info: Images/Projekt_Messe_Swagger3.png  used on input line 
+189.
+(pdftex.def)             Requested size: 371.30595pt x 85.95555pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [23 <./Images/Projekt_Messe_Swagger1.png> <./Images/Projekt_Messe_Swagger2.pn
+g>] [24 <./Images/Projekt_Messe_Swagger3.png>]
 \openout2 = `Chapters/Zusammenfassung.aux'.
 
-
-(./Chapters/Zusammenfassung.tex [14
+ (./Chapters/Zusammenfassung.tex
+[25
 
 
 
@@ -2016,10 +2105,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 56289 strings out of 479383
- 1391016 string characters out of 5873325
+ 56409 strings out of 479383
+ 1394143 string characters out of 5873325
  2206423 words of memory out of 5000000
- 72342 multiletter control sequences out of 15000+600000
+ 72423 multiletter control sequences out of 15000+600000
  466322 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  106i,11n,111p,10670b,681s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2029,10 +2118,10 @@ Here is how much of TeX's memory you used:
 b><c:/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2020/
 texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/texlive/2020/texmf-dist/fonts
 /type1/public/lm/lmsy10.pfb>
-Output written on main.pdf (18 pages, 427471 bytes).
+Output written on main.pdf (29 pages, 846467 bytes).
 PDF statistics:
- 295 PDF objects out of 1000 (max. 8388607)
- 243 compressed objects within 3 object streams
- 91 named destinations out of 1000 (max. 500000)
- 221 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 405 PDF objects out of 1000 (max. 8388607)
+ 324 compressed objects within 4 object streams
+ 120 named destinations out of 1000 (max. 500000)
+ 271 words of extra memory for PDF output out of 10000 (max. 10000000)
 
