@@ -7,25 +7,22 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using Models.Authentication;
-using WebcamApp.OfflineDB;
-using AutoMapper;
 using Models.DTOs;
+using WebcamApp.OfflineDB;
 
 namespace WebcamApp;
 
 internal partial class LoginForm : Form
 {
-    
-    private ApiClient ApiClient { get; set; } = null!;
-    
     private readonly OfflineContext _context;
-    
+
     private readonly IMapper _mapper = AutoMapperConfiguration.Configure();
-    
-    
+
+
     public LoginForm()
     {
         _context = new OfflineContext();
@@ -33,17 +30,16 @@ internal partial class LoginForm : Form
         InitializeComponent();
         try
         {
-            if (!_context.Interests.Any())
-            {
-                StartApp.Enabled = false;
-            }
+            if (!_context.Interests.Any()) StartApp.Enabled = false;
         }
         catch (Exception)
         {
             StartApp.Enabled = false;
         }
     }
-    
+
+    private ApiClient ApiClient { get; set; } = null!;
+
     private async void Login_Click(object sender, EventArgs e)
     {
         var httpClient = new HttpClient();
@@ -68,7 +64,7 @@ internal partial class LoginForm : Form
         httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token.Token}");
 
         ApiClient = new ApiClient(httpClient);
-        
+
         try
         {
             await SynchronizeDatabases();
@@ -80,18 +76,18 @@ internal partial class LoginForm : Form
             MessageBox.Show(exception.Message);
             throw;
         }
-        
+
         DialogResult = DialogResult.OK;
         Close();
     }
-    
+
     private async Task LoadDataToLocalDb()
     {
         var interests = await ApiClient.GetInterestsAsync();
         await _context.Interests.AddRangeAsync(interests);
-        
-        IEnumerable<CompanyDto> companyDtos = await ApiClient.GetCompanyDtosAsync();
-        IEnumerable<Company> companies = _mapper.Map<IEnumerable<Company>>(companyDtos);
+
+        var companyDtos = await ApiClient.GetCompanyDtosAsync();
+        var companies = _mapper.Map<IEnumerable<Company>>(companyDtos);
         await _context.Company.AddRangeAsync(companies);
         await _context.SaveChangesAsync();
     }
@@ -100,7 +96,7 @@ internal partial class LoginForm : Form
     {
         await _context.Database.EnsureDeletedAsync();
         await _context.Database.EnsureCreatedAsync();
-        _context.ChangeTracker.Clear(); 
+        _context.ChangeTracker.Clear();
         //very very important, even after deleting the database, the context still tracks the entities
     }
 
@@ -108,19 +104,19 @@ internal partial class LoginForm : Form
     {
         if (_context.Users.Any())
         {
-            List<User> users = await _context.Users
+            var users = await _context.Users
                 .Include(u => u.Address)
                 .Include(u => u.Company)
-                    .ThenInclude(ca => ca!.Address)
+                .ThenInclude(ca => ca!.Address)
                 .Include(u => u.Interests)
                 .ToListAsync();
             
-            foreach (User user in users)
+            foreach (var user in users)
             {
-                UserDto userDto = _mapper.Map<UserDto>(user);
+                var userDto = _mapper.Map<UserDto>(user);
                 try
                 {
-                    User addedUser = await ApiClient.PostUserAsync(userDto);
+                    var addedUser = await ApiClient.PostUserAsync(userDto);
                     //synchronize programming to avoid adding the same company multiple times and to ensure that if
                     //an exception occurs, the posted user will be deleted
                     _context.Users.Remove(user);
@@ -134,7 +130,7 @@ internal partial class LoginForm : Form
             }
         }
     }
-    
+
 
     private void PasswordTextBox_KeyDown(object sender, KeyEventArgs e)
     {

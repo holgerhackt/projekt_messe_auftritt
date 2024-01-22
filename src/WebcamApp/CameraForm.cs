@@ -14,11 +14,11 @@ namespace WebcamApp;
 
 internal partial class CameraForm : Form
 {
-    private FilterInfoCollection? _filterInfoCollection;
-    private VideoCaptureDevice? _videoCaptureDevice;
-    private readonly OfflineContext? _context;  //null if login failed and is intended
+    private readonly OfflineContext? _context; //null if login failed and is intended
     private readonly IMapper _mapper = AutoMapperConfiguration.Configure();
-    private byte[]? _image;  //null if no image taken
+    private FilterInfoCollection? _filterInfoCollection;
+    private byte[]? _image;
+    private VideoCaptureDevice? _videoCaptureDevice;
 
     public CameraForm()
     {
@@ -33,7 +33,10 @@ internal partial class CameraForm : Form
 
         _context = new OfflineContext();
         FillCheckedListBoxes();
+        Validator = new InputFieldValidator();
     }
+
+    private InputFieldValidator? Validator { get; }
 
 
     private void FillCheckedListBoxes()
@@ -49,6 +52,97 @@ internal partial class CameraForm : Form
         var _companies = _context.Company.ToList();
         foreach (var company in _companies) companyCheckedListBox.Items.Add(company);
     }
+
+    private void ClearInputFields()
+    {
+        NewUserPanel.Controls.OfType<TextBox>().ToList().ForEach(textBox => textBox.Clear());
+        var checkedIndices = companyCheckedListBox.CheckedIndices.Cast<int>().ToList();
+        foreach (var index in checkedIndices) companyCheckedListBox.SetItemChecked(index, false);
+        checkedIndices = interestsCheckedListBox.CheckedIndices.Cast<int>().ToList();
+        foreach (var index in checkedIndices) interestsCheckedListBox.SetItemChecked(index, false);
+        if (_videoCaptureDevice?.IsRunning == true) _videoCaptureDevice.SignalToStop();
+        pictureBox1.Image = null;
+    }
+
+    private Address CreateAddress(Panel panel, HashSet<string> excludedTextBoxNames)
+    {
+        var address = new Address();
+        foreach (var textBox in panel.Controls.OfType<TextBox>())
+        {
+            if (excludedTextBoxNames.Contains(textBox.Name)) continue;
+            switch (textBox.Tag.ToString())
+            {
+                case "Country":
+                    address.Country = string.IsNullOrWhiteSpace(textBox.Text) ? null : textBox.Text;
+                    break;
+                case "City":
+                    address.City = string.IsNullOrWhiteSpace(textBox.Text) ? null : textBox.Text;
+                    break;
+                case "Postalcode":
+                    address.PostalCode = string.IsNullOrWhiteSpace(textBox.Text) ? null : int.Parse(textBox.Text);
+                    break;
+                case "Street":
+                    address.Street = string.IsNullOrWhiteSpace(textBox.Text) ? null : textBox.Text;
+                    break;
+                case "Housenumber":
+                    address.HouseNumber = string.IsNullOrWhiteSpace(textBox.Text) ? null : textBox.Text;
+                    break;
+            }
+        }
+
+        return address;
+    }
+
+    private async void Submit_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            var isUsernameValid = Validator!.ValidateUsername(ForenameTextBox.Text, LastnameTextBox.Text);
+            if (!isUsernameValid)
+            {
+                MessageBox.Show("Please enter a valid username!");
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(PostalcodeTextBox.Text) && !int.TryParse(PostalcodeTextBox.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid postal code!");
+                return;
+            }
+            var errorMessage = Validator!.ValidateTextBoxContent(NewUserPanel, CountryTextbox.Name,
+                HousenumberTextBox.Name, EmailTextBox.Name, CityTextBox.Name);
+            if (errorMessage != null)
+            {
+                MessageBox.Show(errorMessage, "Validation Error");
+                return;
+            }
+
+            var user = new User
+            {
+                Forename = ForenameTextBox.Text,
+                Lastname = LastnameTextBox.Text,
+                Email = EmailTextBox.Text,
+                Image = _image,
+                Interests = interestsCheckedListBox.CheckedItems.Cast<Interest>().ToList(),
+                Company = companyCheckedListBox.CheckedItems.Cast<Company>().SingleOrDefault()
+            };
+            var userExcludedNames = new HashSet<string> { "ForenameTextBox", "LastnameTextBox" };
+            var addressPropertyFilled = Validator.IsAnyAddressPropertyFilled(NewUserPanel, userExcludedNames);
+            if (addressPropertyFilled) user.Address = CreateAddress(NewUserPanel, userExcludedNames);
+            _context!.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            var text = string.Format(Resources.UserCreationSuccessText, user.Forename + " " + user.Lastname);
+            MessageBox.Show(text, Resources.UserCreationSuccessCaption);
+            ClearInputFields();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
+
+    #region Camera
 
     private void StartCameraButton_Click(object sender, EventArgs e)
     {
@@ -112,111 +206,15 @@ internal partial class CameraForm : Form
             MessageBox.Show("No image");
             return;
         }
+
         _videoCaptureDevice!.SignalToStop();
         _image = ImageToByteArray(pictureBox1.Image);
     }
 
-    private async void Submit_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            if (string.IsNullOrWhiteSpace(ForenameTextBox.Text) || string.IsNullOrWhiteSpace(LastnameTextBox.Text))
-            {
-                MessageBox.Show("Please enter your full name!");
-                return;
-            }
+    #endregion
 
-            HashSet<string> integerFields = new HashSet<string> { PostalcodeTextBox.Name, HousenumberTextBox.Name };
-            HashSet<string> stringFields = new HashSet<string> { ForenameTextBox.Name, LastnameTextBox.Name, CountryTextbox.Name, CityTextBox.Name, textBoxStreet.Name };
-            bool hasInvalidContent = ValidateTextBoxContent(NewUserPanel, integerFields, stringFields);
-            if (hasInvalidContent) return;
-            
-            User user = new User()
-            {
-                Forename = ForenameTextBox.Text,
-                Lastname = LastnameTextBox.Text,
-                Image = _image,
-                Interests = interestsCheckedListBox.CheckedItems.Cast<Interest>().ToList(),
-                Company = companyCheckedListBox.CheckedItems.Cast<Company>().SingleOrDefault()
-            };
-            if (IsAnyUserAddressTextBoxFilled())
-            {
-                user.Address = new Address()
-                {
-                    Country = CountryTextbox.Text,
-                    City = CityTextBox.Text,
-                    PostalCode = string.IsNullOrWhiteSpace(PostalcodeTextBox.Text) ? (int?)null : int.Parse(PostalcodeTextBox.Text),
-                    Street = textBoxStreet.Text,
-                    HouseNumber = string.IsNullOrWhiteSpace(HousenumberTextBox.Text) ? (int?)null : int.Parse(HousenumberTextBox.Text),
-                };
-            }
-            _context!.Users.Add(user);
-            await _context.SaveChangesAsync();
+    #region Company
 
-            string text = string.Format(Resources.UserCreationSuccessText, user.Forename + " " + user.Lastname);
-            MessageBox.Show(text, Resources.UserCreationSuccessCaption);
-            ClearInputFields();
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.Message);
-        }
-    }
-
-    private bool ValidateTextBoxContent(Panel panel, HashSet<string> integerFieldNames, HashSet<string> stringFieldNames)
-    {
-        List<string> invalidIntegerFields = new List<string>();
-        List<string> invalidStringFields = new List<string>();
-
-        foreach (TextBox textBox in panel.Controls.OfType<TextBox>())
-        {
-            if (integerFieldNames.Contains(textBox.Name) && !string.IsNullOrWhiteSpace(textBox.Text) && !int.TryParse(textBox.Text, out _))
-            {
-                invalidIntegerFields.Add(textBox.Tag.ToString()!);
-            }
-            else if (stringFieldNames.Contains(textBox.Name) && int.TryParse(textBox.Text, out _))
-            {
-                invalidStringFields.Add(textBox.Tag.ToString()!);
-            }
-        }
-
-        List<string> errorMessageParts = new List<string>();
-        if (invalidIntegerFields.Any())
-        {
-            errorMessageParts.Add($"Please enter valid integer literals for the following fields: {string.Join(", ", invalidIntegerFields)}");
-        }
-        if (invalidStringFields.Any())
-        {
-            errorMessageParts.Add($"Please enter valid string literals for the following fields: {string.Join(", ", invalidStringFields)}");
-        }
-
-        if (errorMessageParts.Any())
-        {
-            MessageBox.Show(string.Join("\n", errorMessageParts), "Validation Error");
-            return true;
-        }
-
-        return false;
-
-    }
-
-
-    private void ClearInputFields()
-    {
-        NewUserPanel.Controls.OfType<TextBox>().ToList().ForEach(textBox => textBox.Clear());
-        var checkedIndices = companyCheckedListBox.CheckedIndices.Cast<int>().ToList();
-        foreach (var index in checkedIndices)
-        {
-            companyCheckedListBox.SetItemChecked(index, false);
-        }
-        checkedIndices = interestsCheckedListBox.CheckedIndices.Cast<int>().ToList();
-        foreach (var index in checkedIndices)
-        {
-            interestsCheckedListBox.SetItemChecked(index, false);
-        }
-        if (_videoCaptureDevice?.IsRunning == true) _videoCaptureDevice.SignalToStop();
-        pictureBox1.Image = null;
-    }
     private void NewCompanyBtn_Click(object sender, EventArgs e)
     {
         NewCompanyPnl.Visible = true;
@@ -232,63 +230,40 @@ internal partial class CameraForm : Form
         NewCompanyBtn.Visible = true;
     }
 
-    private bool IsAnyCompanyAddressTextBoxFilled()
-    {
-        foreach (TextBox textBox in NewCompanyPnl.Controls.OfType<TextBox>())
-        {
-            if (textBox.Name != "CompanyNameTxtBox" && !string.IsNullOrWhiteSpace(textBox.Text))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    private bool IsAnyUserAddressTextBoxFilled()
-    {
-        foreach (TextBox textBox in NewUserPanel.Controls.OfType<TextBox>())
-        {
-            if (textBox.Name != "ForenameTextBox" && textBox.Name != "LastnameTextBox" && !string.IsNullOrWhiteSpace(textBox.Text))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private void AddNewCompanyBtn_Click(object sender, EventArgs e)
     {
         //Return if duplicate
         foreach (var item in companyCheckedListBox.Items)
-        {
             if (item is Company cmp && cmp.Name == CompanyNameTxtBox.Text)
             {
                 ResetCompanyPanel();
                 return;
             }
-        }
 
-        if (CompanyNameTxtBox.Text == "")
+        if (CompanyNameTxtBox.Text == "") //Company names can be creative and contain numbers
         {
             MessageBox.Show("Please enter a company name!");
             return;
         }
-
-        Company company = new Company()
+        if (!string.IsNullOrWhiteSpace(CompanyPostalTxtBox.Text) && !int.TryParse(CompanyPostalTxtBox.Text, out _))
+        {
+            MessageBox.Show("Please enter a valid postal code!");
+            return;
+        }
+        var errorMessage = Validator!.ValidateTextBoxContent(NewCompanyPnl, CompanyCountryTxtBox.Name,
+            CompanyHouseNrTxtBox.Name, null, CompanyCityTxtBox.Name);
+        if (errorMessage != null)
+        {
+            MessageBox.Show(errorMessage, "Validation Error");
+            return;
+        }
+        var company = new Company
         {
             Name = CompanyNameTxtBox.Text
         };
-        if (IsAnyCompanyAddressTextBoxFilled())
-        {
-            company.Address = new Address()
-            {
-                Country = CompanyCountryTxtBox.Text,
-                City = CompanyCityTxtBox.Text,
-                PostalCode = int.Parse(CompanyPostalTxtBox.Text),
-                Street = CompanyStreetTxtBox.Text,
-                HouseNumber = int.Parse(CompanyHouseNrTxtBox.Text)
-            };
-        }
-        //else company.Address = null automatically
+        var companyExcludedNames = new HashSet<string> { "CompanyNameTxtBox" };
+        var companyAddressPropertyFilled = Validator!.IsAnyAddressPropertyFilled(NewCompanyPnl, companyExcludedNames);
+        if (companyAddressPropertyFilled) company.Address = CreateAddress(NewCompanyPnl, companyExcludedNames);
         _context!.Company.Add(company);
         _context.SaveChanges();
 
@@ -297,10 +272,9 @@ internal partial class CameraForm : Form
         foreach (var comp in companies) companyCheckedListBox.Items.Add(comp);
 
         //Checkbox ticked for newly added company
-        for (int i = 0; i < companyCheckedListBox.Items.Count; i++)
-        {
-            if (companyCheckedListBox.Items[i] is Company cmp && cmp.Name == company.Name) companyCheckedListBox.SetItemChecked(i, true);
-        }
+        for (var i = 0; i < companyCheckedListBox.Items.Count; i++)
+            if (companyCheckedListBox.Items[i] is Company cmp && cmp.Name == company.Name)
+                companyCheckedListBox.SetItemChecked(i, true);
         ResetCompanyPanel();
     }
 
@@ -308,4 +282,6 @@ internal partial class CameraForm : Form
     {
         ResetCompanyPanel();
     }
+
+    #endregion
 }

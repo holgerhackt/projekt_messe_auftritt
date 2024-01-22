@@ -67,6 +67,8 @@
             panel1 = new System.Windows.Forms.Panel();
             CamAreaHeaderLbl = new System.Windows.Forms.Label();
             NewUserPanel = new System.Windows.Forms.Panel();
+            label5 = new System.Windows.Forms.Label();
+            EmailTextBox = new System.Windows.Forms.TextBox();
             label4 = new System.Windows.Forms.Label();
             LastnameTextBox = new System.Windows.Forms.TextBox();
             ReturnToCompanies = new System.Windows.Forms.Button();
@@ -167,7 +169,7 @@
             NameLabel.AutoSize = true;
             NameLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             NameLabel.ForeColor = System.Drawing.Color.White;
-            NameLabel.Location = new System.Drawing.Point(10, 38);
+            NameLabel.Location = new System.Drawing.Point(12, 38);
             NameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             NameLabel.Name = "NameLabel";
             NameLabel.Size = new System.Drawing.Size(62, 14);
@@ -194,7 +196,7 @@
             CountryLabel.AutoSize = true;
             CountryLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             CountryLabel.ForeColor = System.Drawing.Color.White;
-            CountryLabel.Location = new System.Drawing.Point(10, 96);
+            CountryLabel.Location = new System.Drawing.Point(8, 141);
             CountryLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             CountryLabel.Name = "CountryLabel";
             CountryLabel.Size = new System.Drawing.Size(47, 14);
@@ -208,7 +210,7 @@
             CountryTextbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             CountryTextbox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             CountryTextbox.ForeColor = System.Drawing.Color.White;
-            CountryTextbox.Location = new System.Drawing.Point(12, 113);
+            CountryTextbox.Location = new System.Drawing.Point(10, 158);
             CountryTextbox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             CountryTextbox.Name = "CountryTextbox";
             CountryTextbox.Size = new System.Drawing.Size(640, 22);
@@ -221,7 +223,7 @@
             CityLabel.AutoSize = true;
             CityLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             CityLabel.ForeColor = System.Drawing.Color.White;
-            CityLabel.Location = new System.Drawing.Point(173, 154);
+            CityLabel.Location = new System.Drawing.Point(173, 199);
             CityLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             CityLabel.Name = "CityLabel";
             CityLabel.Size = new System.Drawing.Size(26, 14);
@@ -235,7 +237,7 @@
             CityTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             CityTextBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             CityTextBox.ForeColor = System.Drawing.Color.White;
-            CityTextBox.Location = new System.Drawing.Point(175, 171);
+            CityTextBox.Location = new System.Drawing.Point(173, 216);
             CityTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             CityTextBox.Name = "CityTextBox";
             CityTextBox.Size = new System.Drawing.Size(477, 22);
@@ -248,7 +250,7 @@
             ZipLabel.AutoSize = true;
             ZipLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             ZipLabel.ForeColor = System.Drawing.Color.White;
-            ZipLabel.Location = new System.Drawing.Point(12, 154);
+            ZipLabel.Location = new System.Drawing.Point(10, 199);
             ZipLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             ZipLabel.Name = "ZipLabel";
             ZipLabel.Size = new System.Drawing.Size(67, 14);
@@ -262,7 +264,7 @@
             PostalcodeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             PostalcodeTextBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             PostalcodeTextBox.ForeColor = System.Drawing.Color.White;
-            PostalcodeTextBox.Location = new System.Drawing.Point(12, 171);
+            PostalcodeTextBox.Location = new System.Drawing.Point(10, 216);
             PostalcodeTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             PostalcodeTextBox.Name = "PostalcodeTextBox";
             PostalcodeTextBox.Size = new System.Drawing.Size(155, 22);
@@ -275,7 +277,7 @@
             StreetLabel.AutoSize = true;
             StreetLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             StreetLabel.ForeColor = System.Drawing.Color.White;
-            StreetLabel.Location = new System.Drawing.Point(10, 213);
+            StreetLabel.Location = new System.Drawing.Point(12, 255);
             StreetLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             StreetLabel.Name = "StreetLabel";
             StreetLabel.Size = new System.Drawing.Size(39, 14);
@@ -289,7 +291,7 @@
             textBoxStreet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             textBoxStreet.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             textBoxStreet.ForeColor = System.Drawing.Color.White;
-            textBoxStreet.Location = new System.Drawing.Point(12, 230);
+            textBoxStreet.Location = new System.Drawing.Point(10, 275);
             textBoxStreet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBoxStreet.Name = "textBoxStreet";
             textBoxStreet.Size = new System.Drawing.Size(525, 22);
@@ -302,7 +304,7 @@
             HousenumberLabel.AutoSize = true;
             HousenumberLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             HousenumberLabel.ForeColor = System.Drawing.Color.White;
-            HousenumberLabel.Location = new System.Drawing.Point(539, 213);
+            HousenumberLabel.Location = new System.Drawing.Point(543, 258);
             HousenumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             HousenumberLabel.Name = "HousenumberLabel";
             HousenumberLabel.Size = new System.Drawing.Size(84, 14);
@@ -316,7 +318,7 @@
             HousenumberTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             HousenumberTextBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             HousenumberTextBox.ForeColor = System.Drawing.Color.White;
-            HousenumberTextBox.Location = new System.Drawing.Point(545, 230);
+            HousenumberTextBox.Location = new System.Drawing.Point(543, 275);
             HousenumberTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             HousenumberTextBox.Name = "HousenumberTextBox";
             HousenumberTextBox.Size = new System.Drawing.Size(107, 22);
@@ -329,7 +331,7 @@
             interestsCheckedListBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             interestsCheckedListBox.ForeColor = System.Drawing.Color.White;
             interestsCheckedListBox.FormattingEnabled = true;
-            interestsCheckedListBox.Location = new System.Drawing.Point(12, 294);
+            interestsCheckedListBox.Location = new System.Drawing.Point(10, 339);
             interestsCheckedListBox.Name = "interestsCheckedListBox";
             interestsCheckedListBox.Size = new System.Drawing.Size(300, 310);
             interestsCheckedListBox.TabIndex = 18;
@@ -340,10 +342,10 @@
             companyCheckedListBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             companyCheckedListBox.ForeColor = System.Drawing.Color.White;
             companyCheckedListBox.FormattingEnabled = true;
-            companyCheckedListBox.Location = new System.Drawing.Point(352, 294);
             companyCheckedListBox.Name = "companyCheckedListBox";
             companyCheckedListBox.Size = new System.Drawing.Size(300, 310);
             companyCheckedListBox.TabIndex = 19;
+            companyCheckedListBox.Location = new System.Drawing.Point(340, 339);
             // 
             // Submit
             // 
@@ -353,7 +355,7 @@
             Submit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             Submit.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             Submit.ForeColor = System.Drawing.Color.White;
-            Submit.Location = new System.Drawing.Point(279, 37);
+            Submit.Location = new System.Drawing.Point(285, 14);
             Submit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Submit.Name = "Submit";
             Submit.Size = new System.Drawing.Size(88, 27);
@@ -370,7 +372,7 @@
             NewCompanyBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             NewCompanyBtn.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             NewCompanyBtn.ForeColor = System.Drawing.Color.White;
-            NewCompanyBtn.Location = new System.Drawing.Point(542, 271);
+            NewCompanyBtn.Location = new System.Drawing.Point(540, 316);
             NewCompanyBtn.Name = "NewCompanyBtn";
             NewCompanyBtn.Size = new System.Drawing.Size(110, 23);
             NewCompanyBtn.TabIndex = 21;
@@ -393,7 +395,7 @@
             NewCompanyPnl.Controls.Add(CompanyCountryLbl);
             NewCompanyPnl.Controls.Add(CompanyNameTxtBox);
             NewCompanyPnl.Controls.Add(NewCompanyNameLbl);
-            NewCompanyPnl.Location = new System.Drawing.Point(342, 294);
+            NewCompanyPnl.Location = new System.Drawing.Point(340, 339);
             NewCompanyPnl.Name = "NewCompanyPnl";
             NewCompanyPnl.Size = new System.Drawing.Size(310, 310);
             NewCompanyPnl.TabIndex = 22;
@@ -423,6 +425,7 @@
             CompanyHouseNrTxtBox.Name = "CompanyHouseNrTxtBox";
             CompanyHouseNrTxtBox.Size = new System.Drawing.Size(77, 23);
             CompanyHouseNrTxtBox.TabIndex = 11;
+            CompanyHouseNrTxtBox.Tag = "Housenumber";
             // 
             // CompanyHouseNrLbl
             // 
@@ -441,6 +444,7 @@
             CompanyStreetTxtBox.Name = "CompanyStreetTxtBox";
             CompanyStreetTxtBox.Size = new System.Drawing.Size(210, 23);
             CompanyStreetTxtBox.TabIndex = 9;
+            CompanyStreetTxtBox.Tag = "Street";
             // 
             // CompanyStreetLbl
             // 
@@ -459,6 +463,7 @@
             CompanyCityTxtBox.Name = "CompanyCityTxtBox";
             CompanyCityTxtBox.Size = new System.Drawing.Size(221, 23);
             CompanyCityTxtBox.TabIndex = 7;
+            CompanyCityTxtBox.Tag = "City";
             // 
             // CompanyCityLbl
             // 
@@ -477,6 +482,7 @@
             CompanyPostalTxtBox.Name = "CompanyPostalTxtBox";
             CompanyPostalTxtBox.Size = new System.Drawing.Size(68, 23);
             CompanyPostalTxtBox.TabIndex = 5;
+            CompanyPostalTxtBox.Tag = "Postalcode";
             // 
             // CompanyPostalLbl
             // 
@@ -495,6 +501,7 @@
             CompanyCountryTxtBox.Name = "CompanyCountryTxtBox";
             CompanyCountryTxtBox.Size = new System.Drawing.Size(292, 23);
             CompanyCountryTxtBox.TabIndex = 3;
+            CompanyCountryTxtBox.Tag = "Country";
             // 
             // CompanyCountryLbl
             // 
@@ -554,6 +561,8 @@
             // 
             NewUserPanel.BackColor = System.Drawing.Color.FromArgb(45, 45, 45);
             NewUserPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            NewUserPanel.Controls.Add(label5);
+            NewUserPanel.Controls.Add(EmailTextBox);
             NewUserPanel.Controls.Add(label4);
             NewUserPanel.Controls.Add(LastnameTextBox);
             NewUserPanel.Controls.Add(ReturnToCompanies);
@@ -578,8 +587,35 @@
             NewUserPanel.Controls.Add(textBoxStreet);
             NewUserPanel.Location = new System.Drawing.Point(863, 12);
             NewUserPanel.Name = "NewUserPanel";
-            NewUserPanel.Size = new System.Drawing.Size(668, 621);
+            NewUserPanel.Size = new System.Drawing.Size(668, 664);
             NewUserPanel.TabIndex = 24;
+            // 
+            // label5
+            // 
+            label5.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label5.ForeColor = System.Drawing.Color.White;
+            label5.Location = new System.Drawing.Point(15, 89);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(38, 14);
+            label5.TabIndex = 30;
+            label5.Text = "Email";
+            // 
+            // EmailTextBox
+            // 
+            EmailTextBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            EmailTextBox.BackColor = System.Drawing.Color.FromArgb(80, 80, 80);
+            EmailTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            EmailTextBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            EmailTextBox.ForeColor = System.Drawing.Color.White;
+            EmailTextBox.Location = new System.Drawing.Point(12, 106);
+            EmailTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            EmailTextBox.Name = "EmailTextBox";
+            EmailTextBox.Size = new System.Drawing.Size(638, 22);
+            EmailTextBox.TabIndex = 3;
+            EmailTextBox.Tag = "Email";
             // 
             // label4
             // 
@@ -587,7 +623,7 @@
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             label4.ForeColor = System.Drawing.Color.White;
-            label4.Location = new System.Drawing.Point(342, 38);
+            label4.Location = new System.Drawing.Point(343, 38);
             label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(60, 14);
@@ -604,8 +640,8 @@
             LastnameTextBox.Location = new System.Drawing.Point(342, 55);
             LastnameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             LastnameTextBox.Name = "LastnameTextBox";
-            LastnameTextBox.Size = new System.Drawing.Size(300, 22);
-            LastnameTextBox.TabIndex = 27;
+            LastnameTextBox.Size = new System.Drawing.Size(308, 22);
+            LastnameTextBox.TabIndex = 2;
             LastnameTextBox.Tag = "Lastname";
             // 
             // ReturnToCompanies
@@ -615,7 +651,7 @@
             ReturnToCompanies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             ReturnToCompanies.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             ReturnToCompanies.ForeColor = System.Drawing.Color.White;
-            ReturnToCompanies.Location = new System.Drawing.Point(539, 271);
+            ReturnToCompanies.Location = new System.Drawing.Point(537, 316);
             ReturnToCompanies.Name = "ReturnToCompanies";
             ReturnToCompanies.Size = new System.Drawing.Size(110, 23);
             ReturnToCompanies.TabIndex = 26;
@@ -629,7 +665,7 @@
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label3.ForeColor = System.Drawing.Color.White;
-            label3.Location = new System.Drawing.Point(342, 273);
+            label3.Location = new System.Drawing.Point(340, 318);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(182, 18);
             label3.TabIndex = 25;
@@ -640,7 +676,7 @@
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label2.ForeColor = System.Drawing.Color.White;
-            label2.Location = new System.Drawing.Point(12, 273);
+            label2.Location = new System.Drawing.Point(10, 318);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(139, 18);
             label2.TabIndex = 24;
@@ -661,9 +697,9 @@
             // 
             panel3.BackColor = System.Drawing.Color.FromArgb(45, 45, 45);
             panel3.Controls.Add(Submit);
-            panel3.Location = new System.Drawing.Point(863, 652);
+            panel3.Location = new System.Drawing.Point(863, 699);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(668, 100);
+            panel3.Size = new System.Drawing.Size(668, 53);
             panel3.TabIndex = 25;
             // 
             // CameraForm
@@ -740,6 +776,8 @@
         private System.Windows.Forms.Button ReturnToCompanies;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox LastnameTextBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox EmailTextBox;
     }
 }
 

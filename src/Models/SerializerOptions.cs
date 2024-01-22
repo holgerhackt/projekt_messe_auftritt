@@ -4,8 +4,8 @@ namespace Models;
 
 public static class SerializerOptions
 {
-	public static JsonSerializerOptions ApiServerOptions = new()
-	{
-		PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-	};
+    public static JsonSerializerOptions ApiServerOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
 }
