@@ -61,6 +61,8 @@ Der Client befindet sich mit den Mitarbeitern am Messe Stand und ist dort auf de
 
 Die Backend Anwendung, eine Rest API, läuft auf den Firmenservern in der Zentrale. Diese wird über das Internet vom Client aus angesteuert, wenn neue Daten durch Mitarbeiter übermittelt werden. Im Gegensatz zur lokalen Client Datenbank, die nur die Daten, des Geräts auf dem diese ausgeführt wird, enthält, sammeln sich in der Datenbank auf dem Firmenserver alle angegebenen Kundendaten an. Zusätzlich werden nach erfolgreicher Übermittlung die Daten vom Client entfernt, um Speicherplatz frei zu machen und Duplikate zu verhindern. Die Mitarbeiter und der Zentrale können im Backend via einer Swagger UI im Browser nach Angabe von validen Anmeldedaten die Kundendaten abfragen.
 
+Zur Autorisierung von Mitarbeitern werden Json Web Tokens verwendet um die Daten zu bearbeiten und zu synchronisieren. Die Kommunikation mit der Zentrale geschieht mittels HTTPS, damit sichergestellt ist, dass die versendeten Daten verschlüsselst sind.
+
 \newpage
 \subsection{USE Case- und Klassen-Diagramme}
 
@@ -193,6 +195,9 @@ Nachdem der Mitarbeiter nun erfolgreich autorisiert wurde kann dieser alle mögl
 
 Alternativ kann von den Mitarbeitern im Backend die .db Datei, die sich im Ordner der Softwarelösung befindet mit dem Terminal oder einem Tool ihrer Wahl geöffnet und diverse Anfragen zum aktuellen Stand der Kundendaten gestellt werden.
 
+Zusätzlich gibt es die Option nach einem Neustart der Anwendung den ''Edit User'' Button zu drücken, das ein neues Fenster öffnet, wo alle lokal gespeicherten Daten angezeigt werden. Nachdem die Daten angepasst wurden muss der Vorgang durch Enter bestätigt werden, ansonsten
+werden die Änderungen verworfen. Mitarbeiter auf der Messe sollten beachten, dass kein Kunde die Daten alleine bearbeitet, sensitive Daten werden zwar nicht angezeigt, aber wir wollen vermeiden, dass falsche Daten mit der Firmenzentrale synchronisiert werden.
+
 \newpage
 \subsection{Testszenarien}
 
@@ -200,10 +205,14 @@ Im Folgenden werden die Testszenarien aufgelistet, die an der Softwarelösung du
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{|c|c|c|c|}
+	\begin{tabular}{|p{0.15\linewidth}|p{0.3\linewidth}|p{0.4\linewidth}|p{0.15\linewidth}|}
 		\hline
 		Testnummer & Testbeschreibung & Erwartetes Ergebnis & Bestanden \\ \hline
-		&&& \\ \hline
+		1 & Mitarbeiter Registrierung im Backend & Erfolgreiche Registrierung und Erhalt Token & Ja\\ \hline
+		2 & Start Anwendung Offline & Anwendung startet ohne Anmeldedaten & Ja \\ \hline
+		3 & Synchronisierung und Anwendung Start mit Anmeldedaten & Daten werden synchronisiert dann öffnet sich Anwendung & Ja \\ \hline
+		4 & Aktive Webcams und Auswahl & Liste aller verfügbaren Webcam angezeigt und auswählbar & Ja \\ \hline
+		5 & Webcam starten & Webcam startet und wird angezeigt nach Button drücken & Ja  \\ \hline
 	\end{tabular}
 	\caption{Tabelle der Testszenarien Teil 1}
 \end{table}
