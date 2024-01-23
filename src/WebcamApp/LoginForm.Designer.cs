@@ -36,6 +36,7 @@
             PasswordLabel = new System.Windows.Forms.Label();
             StartApp = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
+            EditUserData = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // Login
@@ -119,7 +120,7 @@
             StartApp.ForeColor = System.Drawing.Color.White;
             StartApp.Image = (System.Drawing.Image)resources.GetObject("StartApp.Image");
             StartApp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            StartApp.Location = new System.Drawing.Point(28, 79);
+            StartApp.Location = new System.Drawing.Point(29, 65);
             StartApp.Name = "StartApp";
             StartApp.Size = new System.Drawing.Size(90, 28);
             StartApp.TabIndex = 6;
@@ -131,10 +132,28 @@
             // label1
             // 
             label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            label1.Location = new System.Drawing.Point(141, 9);
+            label1.Location = new System.Drawing.Point(150, 9);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(2, 193);
             label1.TabIndex = 7;
+            // 
+            // EditUserData
+            // 
+            EditUserData.BackColor = System.Drawing.Color.FromArgb(61, 61, 61);
+            EditUserData.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(90, 90, 90);
+            EditUserData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            EditUserData.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            EditUserData.ForeColor = System.Drawing.Color.White;
+            EditUserData.Image = (System.Drawing.Image)resources.GetObject("EditUserData.Image");
+            EditUserData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            EditUserData.Location = new System.Drawing.Point(12, 145);
+            EditUserData.Name = "EditUserData";
+            EditUserData.Size = new System.Drawing.Size(123, 28);
+            EditUserData.TabIndex = 8;
+            EditUserData.Text = "Edit UserData";
+            EditUserData.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            EditUserData.UseVisualStyleBackColor = false;
+            EditUserData.Click += EditUserData_Click;
             // 
             // LoginForm
             // 
@@ -142,6 +161,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.FromArgb(24, 24, 24);
             ClientSize = new System.Drawing.Size(515, 211);
+            Controls.Add(EditUserData);
             Controls.Add(label1);
             Controls.Add(StartApp);
             Controls.Add(PasswordLabel);
@@ -169,5 +189,6 @@
         private System.Windows.Forms.Label PasswordLabel;
         private System.Windows.Forms.Button StartApp;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button EditUserData;
     }
 }

@@ -29,7 +29,7 @@ namespace WebcamApp.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("InterestUser");
+                    b.ToTable("InterestUser", (string)null);
                 });
 
             modelBuilder.Entity("Models.Address", b =>
@@ -55,7 +55,7 @@ namespace WebcamApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("Models.Company", b =>
@@ -75,7 +75,7 @@ namespace WebcamApp.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Company");
+                    b.ToTable("Company", (string)null);
                 });
 
             modelBuilder.Entity("Models.Interest", b =>
@@ -90,7 +90,7 @@ namespace WebcamApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Interests");
+                    b.ToTable("Interests", (string)null);
                 });
 
             modelBuilder.Entity("Models.User", b =>
@@ -125,7 +125,7 @@ namespace WebcamApp.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("InterestUser", b =>
