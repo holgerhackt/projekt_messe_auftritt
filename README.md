@@ -17,7 +17,7 @@ remove the user and create a new one with the correct company address.
 > **IMPORTANT**: Do not let the user edit the data by himself! We are
 already hiding sensitive columns but we want to avoid syncing wrong 
 data. There is also no validation of the data, so be aware of changing
-the data.
+the data, especially when it comes to the company related data.
 ## Syncing with backend
 At the end of the fair, please close the WebcamApp, and restart it
 to return to the LoginForm. Then enter your credentials and press the
@@ -32,4 +32,3 @@ manipulate the data.
 ## Secure connection
 We are using HTTPS to ensure that the data is encrypted during the 
 transfer.
-## Data storage
