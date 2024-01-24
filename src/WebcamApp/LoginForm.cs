@@ -147,4 +147,12 @@ internal partial class LoginForm : Form
     {
         Login.Enabled = !string.IsNullOrEmpty(UsernameTextBox.Text) && !string.IsNullOrEmpty(PasswordTextBox.Text);
     }
+
+    private void EditUserData_Click(object sender, EventArgs e)
+    {
+        var editUserDataForm = new UserManager();
+        Hide();
+        editUserDataForm.ShowDialog();
+        Show();
+    }
 }
