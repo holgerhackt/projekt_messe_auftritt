@@ -195,8 +195,31 @@ Nachdem der Mitarbeiter nun erfolgreich autorisiert wurde kann dieser alle mögl
 
 Alternativ kann von den Mitarbeitern im Backend die .db Datei, die sich im Ordner der Softwarelösung befindet mit dem Terminal oder einem Tool ihrer Wahl geöffnet und diverse Anfragen zum aktuellen Stand der Kundendaten gestellt werden.
 
-Zusätzlich gibt es die Option nach einem Neustart der Anwendung den ''Edit User'' Button zu drücken, das ein neues Fenster öffnet, wo alle lokal gespeicherten Daten angezeigt werden. Nachdem die Daten angepasst wurden muss der Vorgang durch Enter bestätigt werden, ansonsten
+Zusätzlich gibt es die Option nach einem Neustart der Anwendung den ''Edit User'' Button zu drücken (vgl. Abbildung \ref{fig:projektmesseloginscreen}), das ein neues Fenster öffnet, wo alle lokal gespeicherten Daten angezeigt werden (Siehe Abbildung \ref{fig:usergrid}). Nachdem die Daten angepasst wurden muss der Vorgang durch Enter bestätigt werden, ansonsten
 werden die Änderungen verworfen. Mitarbeiter auf der Messe sollten beachten, dass kein Kunde die Daten alleine bearbeitet, sensitive Daten werden zwar nicht angezeigt, aber wir wollen vermeiden, dass falsche Daten mit der Firmenzentrale synchronisiert werden.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\linewidth]{Images/UserGrid}
+	\caption{Kundendatenbearbeitung}
+	\label{fig:usergrid}
+\end{figure}
+
+\newpage
+\subsection{Risiko-Einschätzung} 
+
+\subsubsection{Backend}
+
+Unser Firmenserver wird zunächst einmal durch eine Firewall und ACLs durch Netzwerkkomponenten geschützt. Darüber hinaus können nur autorisierte Nutzer, aufgrund der Nutzung von JWT, auf die Ressourcen zugreifen. Die Daten als solche liegen in plain Text vor. Das bedeutet, dass wenn jemand autorisierter Zugriff erhält, hat er sofort autorisierten Zugriff. Daher wird der Token regelmäßig rotiert. Stellen Sie sicher, dass die Administratoren regelmäßig, über die Messe hinweg, die Passwörter ändern. 
+
+\subsubsection{Frontend}
+
+Zunächst einmal sollten die firmeninternen Geräte mit einem Passwort geschützt werden. Wenn kein Mitarbeiter vor Ort ist, um die Kundenaktivitäten zu überprüfen, müssen die Laptops gesperrt werden. Die Daten liegen auch hier in plain Text vor. Auslesen könnte man diese also. Da für die Synchronisierung allerdings Username und Passwort benötigt werden, ist der Server in der Hinsicht geschützt. 
+
+\subsubsection{Kommunikation}
+
+Die Kommunikation zwischen backend und frontend erfolgt über https. Dies gewährleistet, dass die Daten während der gesamten Kommunikation verschlüsselt übertragen werden. Dies macht Man in the Middle attacks quasi nutzlos. 
+
 
 \newpage
 \subsection{Testszenarien}
@@ -213,9 +236,44 @@ Im Folgenden werden die Testszenarien aufgelistet, die an der Softwarelösung du
 		3 & Synchronisierung und Anwendung Start mit Anmeldedaten & Daten werden synchronisiert dann öffnet sich Anwendung & Ja \\ \hline
 		4 & Aktive Webcams und Auswahl & Liste aller verfügbaren Webcam angezeigt und auswählbar & Ja \\ \hline
 		5 & Webcam starten & Webcam startet und wird angezeigt nach Button drücken & Ja  \\ \hline
+		6 & Lokal gespeicherte Daten bearbeiten & Über "Edit User" können Daten vor dem absenden bearbeitet werden & Ja \\ \hline
+		7 & Kundendaten anlegen & Es können Kundendaten angegeben, ein Bild aufgenommen und gespeichert werden & Ja \\ \hline
+		8 & Interessen Auswahl & Es können Interessen aus einer Liste gewählt werden & Ja \\ \hline
+		9 & Firmen Verwaltung und Auswahl & Firmen können angelegt und zum Kunden ausgewählt werden & Ja \\ \hline
+		10 & Der Mitarbeiter versucht sich mit seinen Zugangsdaten anzumelden, während keine Verbindung zum Server besteht. & Es wird ein Fehler auftreten, der besagt, dass keine Verbindung mit dem Zielcomputer hergestellt werden konnte. Somit werden auch keine Daten gesendet. & ja \\ \hline
+		11 & Bei bestehender Internetverbindung versucht der Mitarbeiter sich mit falschen Zugangsdaten anzumelden. & Es wird ein Fehler auftreten, der besagt, dass der Login Vorgang gefailed ist. & ja \\ \hline
 	\end{tabular}
 	\caption{Tabelle der Testszenarien Teil 1}
 \end{table}
 
+\newpage
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|p{0.15\linewidth}|p{0.3\linewidth}|p{0.4\linewidth}|p{0.15\linewidth}|}
+		\hline
+		12 & Der Mitarbeiter startet die main app, gibt Vorname und Nachname ein. Schließt die Anwendung und loggt sich dann mit seinen Zugangsdaten ein. & Die Daten werden an den Server gesendet und es öffnet sich danach die main app. Überprüfbar ist dies mithilfe des GET endpoints des UserControllers. Die Werte für Address und Company sind null. & Ja, der neue Eintrag konnte gefunden werden und Address, sowie Company sind null. \\ \hline
+		13 & Der Mitarbeiter startet die main app, gibt Vorname und Nachname ein. Außerdem gibt er einen validen Namen für eine Straße ein, wählt eine Interesse aus, und legt darüber hinaus eine neue Company an, die neben einem Namen auch als Country den Wert „Deutschland“ erhält. Dann schließt er die Anwendung und loggt sich dann mit seinen Zugangsdaten ein. & Die Daten werden alle samt an den Server gesendet und Address, Company und Interests sind nicht null. & Durch den GET endpoint konnte verifiziert werden, dass der User alle ausgewählten Attribute hat. \\ \hline
+		14 & Der User gibt nur seinen Vornamen ein. & Es erscheint eine MessageBox, die angibt, dass man einen vollständigen Username, also sowohl Vor- als auch Nachnamen angeben soll. & Ja, diese MessageBox erscheint. \\ \hline
+		15 & Der User gibt einen Vor- und Nachnamen ein. Alle anderen Felder bleiben leer. & Es wird der Nutzer angelegt, und es erscheint kein Fehler, da alle anderen Properties nullable sind. & Ja, der User wird erfolgreich angelegt (und kann beim Synchronisieren gesendet werden). \\ \hline
+		16 & Der User gibt einen Vor- und Nachnamen ein, aber beide enthalten Nummern. & Es erscheint eine MessageBox, die ausgibt, dass ein valider Username angegeben werden soll. & Ja, diese MessageBox erscheint. \\ \hline
+	\end{tabular}
+	\caption{Tabelle der Testszenarien Teil 2}
+\end{table}
 
-
+\newpage
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|p{0.15\linewidth}|p{0.3\linewidth}|p{0.4\linewidth}|p{0.15\linewidth}|}
+		\hline
+		17 & Der User gibt einen Doppelnamen mit Leerzeichen getrennt an, und einen validen Nachnamen. & Es wird der Nutzer angelegt, und es erscheint kein Fehler, da Doppelnamen erlaubt sind. & Der Nutzer wird erfolgreich angelegt. \\ \hline
+		18 & Der User gibt einen validen Username an, und gibt darüber hinaus eine Zahlenfolge als Postleitzahl ein. & Es wird der Nutzer angelegt, und es erscheint kein Fehler, da die Postleitzahl als Integer geparsed werden kann. & Der Nutzer wird erfolgreich angelegt. \\ \hline
+		19 & Der User gibt einen validen Username an, und darüber hinaus eine Postleitzahl, in der sich allerdings auch Buchstaben befinden. & Es erscheint eine MessageBox, die ausgibt, dass eine valide Postleitzahl angegeben werden soll. & Ja, diese MessageBox erscheint. \\ \hline
+		20 & Der User gibt einen validen Username an, und darüber hinaus einen Straßennamen, der mit „-„ getrennt ist. & Es wird der Nutzer angelegt, und es erscheint kein Fehler, da solche Straßennamen erlaubt sein sollen. & Der Nutzer wird erfolgreich angelegt. \\ \hline
+		21 & Der User gibt einen validen Username an, und darüber hinaus einen Straßennamen, der auch Zahlen enthält. & Es erscheint eine MessageBox, die ausgibt, dass eine valide Straße, also nur mit strings, angegeben werden soll. & Nein, der Nutzer wird dennoch angelegt. \\ \hline
+		22 & Der User gibt einen validen Username an, und darüber hinaus eine Hausnummer, die allerdings mit einem Buchstaben vorangestellt ist. & Es erscheint eine MessageBox, die ausgibt, dass eine valide Hausnummer, also nur mit einer Zahl und einem Buchstaben am Ende, angegeben werden soll. & Ja, diese MessageBox erscheint. \\ \hline
+		23 & Der User gibt einen validen Username an, und darüber hinaus eine Hausnummer, die zwar mit Zahlen beginnt, aber mit mehr als einem Buchstaben endet. & Es erscheint eine MessageBox, die ausgibt, dass eine valide Hausnummer, also nur mit einer Zahl und einem Buchstaben am Ende, angegeben werden soll. & Ja, diese MessageBox erscheint. \\ \hline
+		24 & Der User gibt einen validen Username an, und darüber hinaus die Hausnummer 12a & Der User wird erfolgreich angelegt. & Der Nutzer wird erfolgreich angelegt. \\ \hline
+		
+	\end{tabular}
+	\caption{Tabelle der Testszenarien Teil 3}
+\end{table}
