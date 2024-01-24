@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             UserTabelle = new System.Windows.Forms.DataGridView();
             Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Forename = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,10 +55,19 @@
             // UserTabelle
             // 
             UserTabelle.AllowUserToAddRows = false;
-            UserTabelle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            UserTabelle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            UserTabelle.BackgroundColor = System.Drawing.Color.FromArgb(24, 24, 24);
             UserTabelle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             UserTabelle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Id, Forename, Lastname, Email, Image, AddressId, Country, City, PostalCode, Street, HouseNumber, CompanyId, CompanyName, CompanyAddressId, CompanyCountry, CompanyCity, CompanyPostalCode, CompanyStreet, CompanyHouseNumber });
-            UserTabelle.GridColor = System.Drawing.SystemColors.ButtonFace;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            UserTabelle.DefaultCellStyle = dataGridViewCellStyle1;
+            UserTabelle.GridColor = System.Drawing.SystemColors.ControlText;
             UserTabelle.Location = new System.Drawing.Point(12, 28);
             UserTabelle.Name = "UserTabelle";
             UserTabelle.RowTemplate.Height = 25;
@@ -73,28 +83,24 @@
             Id.Name = "Id";
             Id.ReadOnly = true;
             Id.Visible = false;
-            Id.Width = 42;
             // 
             // Forename
             // 
             Forename.DataPropertyName = "Forename";
             Forename.HeaderText = "Forename";
             Forename.Name = "Forename";
-            Forename.Width = 85;
             // 
             // Lastname
             // 
             Lastname.DataPropertyName = "Lastname";
             Lastname.HeaderText = "Lastname";
             Lastname.Name = "Lastname";
-            Lastname.Width = 83;
             // 
             // Email
             // 
             Email.DataPropertyName = "Email";
             Email.HeaderText = "Email";
             Email.Name = "Email";
-            Email.Width = 61;
             // 
             // Image
             // 
@@ -103,7 +109,6 @@
             Image.Name = "Image";
             Image.ReadOnly = true;
             Image.Visible = false;
-            Image.Width = 65;
             // 
             // AddressId
             // 
@@ -112,42 +117,36 @@
             AddressId.Name = "AddressId";
             AddressId.ReadOnly = true;
             AddressId.Visible = false;
-            AddressId.Width = 84;
             // 
             // Country
             // 
             Country.DataPropertyName = "Country";
             Country.HeaderText = "Country";
             Country.Name = "Country";
-            Country.Width = 75;
             // 
             // City
             // 
             City.DataPropertyName = "City";
             City.HeaderText = "City";
             City.Name = "City";
-            City.Width = 53;
             // 
             // PostalCode
             // 
             PostalCode.DataPropertyName = "PostalCode";
             PostalCode.HeaderText = "PostalCode";
             PostalCode.Name = "PostalCode";
-            PostalCode.Width = 92;
             // 
             // Street
             // 
             Street.DataPropertyName = "Street";
             Street.HeaderText = "Street";
             Street.Name = "Street";
-            Street.Width = 62;
             // 
             // HouseNumber
             // 
             HouseNumber.DataPropertyName = "HouseNumber";
             HouseNumber.HeaderText = "HouseNumber";
             HouseNumber.Name = "HouseNumber";
-            HouseNumber.Width = 110;
             // 
             // CompanyId
             // 
@@ -156,14 +155,12 @@
             CompanyId.Name = "CompanyId";
             CompanyId.ReadOnly = true;
             CompanyId.Visible = false;
-            CompanyId.Width = 94;
             // 
             // CompanyName
             // 
             CompanyName.DataPropertyName = "CompanyName";
             CompanyName.HeaderText = "CompanyName";
             CompanyName.Name = "CompanyName";
-            CompanyName.Width = 116;
             // 
             // CompanyAddressId
             // 
@@ -172,42 +169,36 @@
             CompanyAddressId.Name = "CompanyAddressId";
             CompanyAddressId.ReadOnly = true;
             CompanyAddressId.Visible = false;
-            CompanyAddressId.Width = 136;
             // 
             // CompanyCountry
             // 
             CompanyCountry.DataPropertyName = "CompanyCountry";
             CompanyCountry.HeaderText = "CompanyCountry";
             CompanyCountry.Name = "CompanyCountry";
-            CompanyCountry.Width = 127;
             // 
             // CompanyCity
             // 
             CompanyCity.DataPropertyName = "CompanyCity";
             CompanyCity.HeaderText = "CompanyCity";
             CompanyCity.Name = "CompanyCity";
-            CompanyCity.Width = 105;
             // 
             // CompanyPostalCode
             // 
             CompanyPostalCode.DataPropertyName = "CompanyPostalCode";
             CompanyPostalCode.HeaderText = "CompanyPostalCode";
             CompanyPostalCode.Name = "CompanyPostalCode";
-            CompanyPostalCode.Width = 144;
             // 
             // CompanyStreet
             // 
             CompanyStreet.DataPropertyName = "CompanyStreet";
             CompanyStreet.HeaderText = "CompanyStreet";
             CompanyStreet.Name = "CompanyStreet";
-            CompanyStreet.Width = 114;
             // 
             // CompanyHouseNumber
             // 
             CompanyHouseNumber.DataPropertyName = "CompanyHouseNumber";
             CompanyHouseNumber.HeaderText = "CompanyHouseNumber";
             CompanyHouseNumber.Name = "CompanyHouseNumber";
-            CompanyHouseNumber.Width = 162;
             // 
             // UserManager
             // 

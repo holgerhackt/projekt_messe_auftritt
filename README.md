@@ -1,4 +1,4 @@
-# Information for administrators
+# Information for employees
 ## First steps
 If the fair begins, simply press the Start App button on the login screen.
 Ideally also start the webcam app, so that the user can take a picture.

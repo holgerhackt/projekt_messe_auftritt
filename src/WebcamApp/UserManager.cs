@@ -58,8 +58,8 @@ namespace WebcamApp
                     var updatedUser = _mapper.Map<User>(dataGridUser);
                     _context.Users.Remove(userInDb);
                     _context.SaveChanges();
-                    
-                    if(dataGridUser.AddressId != null)
+
+                    if (dataGridUser.AddressId != null)
                     {
                         Address addressInDb = _context.Addresses.FirstOrDefault(a => a.Id == dataGridUser.AddressId);
                         _context.Addresses.Remove(addressInDb);
@@ -67,7 +67,7 @@ namespace WebcamApp
                         updatedUser.Address.Id = 0;
                         updatedUser.AddressId = 0;
                     }
-                    if(dataGridUser.CompanyId != null)
+                    if (dataGridUser.CompanyId != null)
                     {
                         Company companyInDb = _context.Company.FirstOrDefault(c => c.Id == dataGridUser.CompanyId);
                         _context.Company.Remove(companyInDb);
